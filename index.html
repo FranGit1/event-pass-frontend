@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Event Pass</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      var pano_iframe_name = "panoee-tour-embeded";
+      window.addEventListener("devicemotion", function (e) {
+        var iframe = document.getElementById(pano_iframe_name);
+        if (iframe)
+          iframe.contentWindow.postMessage(
+            {
+              type: "devicemotion",
+              deviceMotionEvent: {
+                acceleration: {
+                  x: e.acceleration.x,
+                  y: e.acceleration.y,
+                  z: e.acceleration.z,
+                },
+                accelerationIncludingGravity: {
+                  x: e.accelerationIncludingGravity.x,
+                  y: e.accelerationIncludingGravity.y,
+                  z: e.accelerationIncludingGravity.z,
+                },
+                rotationRate: {
+                  alpha: e.rotationRate.alpha,
+                  beta: e.rotationRate.beta,
+                  gamma: e.rotationRate.gamma,
+                },
+                interval: e.interval,
+                timeStamp: e.timeStamp,
+              },
+            },
+            "*"
+          );
+      });
+    </script>
+  </body>
+</html>

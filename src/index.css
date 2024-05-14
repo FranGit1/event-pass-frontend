@@ -1,0 +1,151 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Starter CSS starts here */
+/* Read more about this CSS here:  https://www.freecodecamp.org/news/html-page-width-height/
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* These styles are added to disable iOS zoom.
+Safari on mobile automatically zooms your app if these conditions are met:
+  1) you must focus on HTML input
+  2) font size in focused input is less than 16px
+Provided solution is known to vary from one iOS version to another.
+*/
+
+html {
+  -webkit-text-size-adjust: none;
+  touch-action: manipulation;
+}
+body,
+#root {
+  /* min-height: 100vh; */
+  max-width: 100%;
+  /* because of toast */
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: none !important;
+}
+/* Starter CSS ends here */
+
+/* CSS variables used by Tailwind */
+:root {
+  --indigo-dark-pirmary: #1f3fb5;
+  --indigo-pirmary: #254dda;
+  --indigo-secondary: #9daee8;
+  --indigo-secondary-light: #dfe7ff;
+
+  --teal-dark-pirmary: #044146;
+  --teal-pirmary: #04555c;
+  --teal-secondary: #006d76;
+  --teal-secondary-light: #5cc2c7e6;
+
+  --blue-dark-pirmary: #257ce8;
+  --blue-pirmary: #2686fd;
+  --blue-secondary: #8abeff;
+  --blue-secondary-light: #8abeffe6;
+
+  --violet-dark-pirmary: #2a0054;
+  --violet-pirmary: #30005f;
+  --violet-secondary: #501b86;
+  --violet-secondary-light: #501b8650;
+
+  --green-dark-pirmary: #2c5030;
+  --green-pirmary: #325c36;
+  --green-secondary: #5b8650;
+  --green-secondary-light: #5b865059;
+
+  --orange-dark-pirmary: #d4983e;
+  --orange-pirmary: #db9e41;
+  --orange-secondary: #edba6d;
+  --orange-secondary-light: #edba6d59;
+
+  --brown-dark-pirmary: #8b7a65;
+  --brown-pirmary: #948068;
+  --brown-secondary: #bba58b;
+  --brown-secondary-light: #c8b29866;
+
+  --black-dark-pirmary: #000;
+  --black-pirmary: #131313;
+  --black-secondary: #393939;
+  --black-secondary-light: #3939394c;
+
+  --indicator-available: #5f7f4c;
+  --indicator-reserved: #d6ac40;
+  --indicator-unavailable: #991616;
+
+  --primary: #254dda;
+  --primary900: #192b37;
+  --primary800: #1c3a4e;
+  --primary600: #1d5883;
+  --primary500: #39749b;
+  --primary400: #578fb2;
+  --primary300: #78aac6;
+  --primary200: #9ac3d8;
+  --primary100: #bfdbe9;
+  --primary50: #e6f1f7;
+  --primary40: #f3f9fb;
+
+  --secondary: #dc3545;
+  --secondary100: #f2a289;
+  --secondary200: #f9d7ce;
+  --secondary300: #fceae6;
+  --secondary400: #e2e8f9;
+
+  --white: #ffffff;
+  --black: #111827;
+  --gray: #484848;
+  --gray-image: #92919a45;
+  --gray-disabled: #aaacb5;
+  --gray-light: #d8d8d8;
+  --gray100: #eee;
+  --gray200: #4b5563;
+  --gray300: #6b7280;
+  --gray400: #374151;
+  --gray500: #fafafa;
+  --gray600: #f7f7f7;
+  --gray700: #d9d9d9;
+
+  --func-error: #991616;
+  --func-error100: #fbebed;
+  --func-success: #55a35d;
+  --func-success100: #eef6ef;
+  --func-warning: #f5d000;
+  --func-info: #1d4ed8;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.drawer:not(.drawer-open) {
+  display: none;
+}
+
+.drawer-open {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.drawer-content {
+  background-color: white;
+  z-index: 100;
+  height: 100vh;
+}
+
+.Toastify__toast-container {
+  @media (min-width: 640px) {
+    width: 30rem;
+  }
+}
