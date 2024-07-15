@@ -1,13 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { AppRouter } from "./navigation/buyer/AppRouter";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RecoilRoot } from "recoil";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import resources from "./utils/locale";
-import { AppRouter } from "./navigation/AppRouter";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,13 +23,13 @@ const queryClient = new QueryClient({
 i18n.use(initReactI18next).init({
   //@ts-ignore
   resources,
-  lng: "hr",
+  lng: "en",
   interpolation: {
     escapeValue: false,
   },
 });
 
-function App() {
+function BuyerApp() {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
@@ -49,10 +49,10 @@ function App() {
             />
           </ErrorBoundary>
         </BrowserRouter>
-        <ReactQueryDevtools />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </RecoilRoot>
   );
 }
 
-export default App;
+export default BuyerApp;

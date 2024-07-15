@@ -149,3 +149,13 @@ input::-webkit-inner-spin-button {
     width: 30rem;
   }
 }
+
+.geoapify-autocomplete-input {
+  padding: 1.4rem 1.25rem 1.4rem !important;
+  border-width: 2px !important;
+  border: 2px solid var(--Light-grey, #d8d8d8) !important;
+  border-radius: 9999px !important;
+  border-width: 2px !important;
+  background-color: var(--white);
+  min-width: 100%;
+}

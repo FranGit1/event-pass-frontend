@@ -1,4 +1,4 @@
-import { ISearchParams } from './hooks/use-search';
+import { ISearchParams } from "./hooks/use-search";
 
 export type User = {
   id: number;
@@ -26,14 +26,9 @@ export type PaginatedResponse<T> = {
   total: number;
 };
 
-export enum ProjectType {
-  Realestate = 'realestate',
-  Preview = 'preview'
-}
-
-export type FilterDataPrefill = {
-  floorNumberArray: number[];
-  bathroomsArray: number[];
-  bedroomsArray: number[];
-  availabilityStatusArray: string[];
-};
+export const Topics = [
+  { name: "Music", id: 1 },
+  { name: "Sport", id: 2 },
+  { name: "Theatre", id: 3 },
+  { name: "Other", id: 4 },
+];

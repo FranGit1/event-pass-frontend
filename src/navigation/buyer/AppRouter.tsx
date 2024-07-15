@@ -1,7 +1,7 @@
 import "twin.macro";
 import { Navigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-import { BaseLayout } from "../pages/admin/BaseLayout";
+import { BaseLayout } from "../../pages/admin/BaseLayout";
 import { routes } from "./routing";
 
 export const AppRouter = () => {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "./config";
-import { LoginForm, RegisterForm } from "./types";
+import { CreateEventDto, LoginForm, Organization, RegisterForm } from "./types";
 
 const axiosPublic = axios.create({
   baseURL: `${config.VITE_APP_BACKEND_URL}/api`,
@@ -58,6 +58,44 @@ class HTTP {
     }
   };
 
+  getComplexBuildingsAndUnitTypes = async (
+    id: number
+  ): Promise<Organization[]> => {
+    try {
+      const response = await axiosPublic.get(
+        `organizations/organizations-by-organizer/${id}`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+  getEventsByOrganization = async (id: number): Promise<Organization[]> => {
+    try {
+      const response = await axiosPublic.get(
+        `events/events-by-organization/${id}`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  createNewEvent = async (
+    eventData: CreateEventDto,
+    organizationId: number
+  ) => {
+    try {
+      const response = await axiosPublic.post(
+        `events/${organizationId}`,
+        eventData
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   // TODO
   logout = async () => {
     // const response = await axiosPublic.post('/logout')
@@ -65,6 +103,17 @@ class HTTP {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     return true;
+  };
+
+  validateRecaptcha = async (token: string) => {
+    try {
+      const response = await axiosPublic.post(`auth/verify-recaptcha`, {
+        token,
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   };
 }
 

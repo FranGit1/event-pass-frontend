@@ -28,6 +28,8 @@
     "@babel/plugin-transform-react-jsx": "^7.22.5",
     "@emotion/babel-plugin-jsx-pragmatic": "^0.2.1",
     "@floating-ui/react-dom-interactions": "0.13.3",
+    "@geoapify/geocoder-autocomplete": "^2.0.1",
+    "@geoapify/react-geocoder-autocomplete": "^2.0.0",
     "@hookform/resolvers": "^3.1.1",
     "@react-pdf/renderer": "^3.4.0",
     "@tanstack/react-query": "^5.10.0",

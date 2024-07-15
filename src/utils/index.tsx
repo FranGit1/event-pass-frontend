@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import React, { FunctionComponent, SVGProps } from "react";
 import tw from "twin.macro";
-import { Maybe } from "../types";
+import { CreateEventDto, Maybe } from "../types";
 
 export const errorMessageStrings = {
   passwordRequired: "passwordRequiredError",
@@ -97,4 +97,24 @@ export type SidebarItem = {
     unselected: FunctionComponent<SVGProps<SVGSVGElement>>;
   };
   label: string;
+};
+
+export const transformEvent = (event: any): CreateEventDto => {
+  return {
+    topicId: event.topic.value,
+    location: {
+      ...event.location,
+      latitude: event.location.latitude.toString(),
+      longitude: event.location.longitude.toString(),
+    },
+    sliderPosition: event.sliderPosition,
+    displayInSlider: event.displayInSlider,
+    featuredImage: event.featuredImage,
+    keywords: event.keywords,
+    endDate: event.endDate,
+    startDate: event.startDate,
+    price: event.price,
+    description: event.description,
+    title: event.title,
+  };
 };

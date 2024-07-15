@@ -13,7 +13,7 @@ import { MobileMenu } from "./MobileMenu";
 import { ReactComponent as Home } from "../../assets/icons/home.svg";
 import { IComponentBaseProps } from "../../types";
 import { useParams } from "react-router-dom";
-import { routes } from "../../navigation/routing";
+import { routes } from "../../navigation/admin/routing";
 
 export interface IHeaderProps extends IComponentBaseProps {}
 
@@ -25,7 +25,7 @@ export const Header = (props: IHeaderProps) => {
   const isMobile = useMedia("(max-width: 1200px)");
   const { auth } = useAuth();
 
-  const isHomePage = location.pathname === `${slug}/${routes.admin.base}`;
+  const isHomePage = location.pathname === `${slug}/${routes.base}`;
   const { t } = useTranslation();
 
   return (

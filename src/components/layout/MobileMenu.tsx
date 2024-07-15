@@ -10,7 +10,7 @@ import useAuth from "../../hooks/auth/useAuth";
 import { ReactComponent as Home } from "../../assets/icons/home.svg";
 import { useMedia } from "react-use";
 import { ReactComponent as ProfileIcon } from "../../assets/icons/user.svg";
-import { routes } from "../../navigation/routing";
+import { routes } from "../../navigation/admin/routing";
 
 interface MobileMenuProps {
   onNavigation: () => void;

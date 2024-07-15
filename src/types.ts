@@ -79,3 +79,37 @@ export interface LoginForm {
   email: string;
   password: string;
 }
+
+export type Organization = {
+  id: number;
+  title: string;
+  organizer: string;
+  slug: string;
+  organizerDescription: string | null;
+  organizerFacebook: string | null;
+  organizerEmail: string | null;
+  organizerLink: string | null;
+  organizerInstagram: string | null;
+};
+
+type EventLocation = {
+  city: string;
+  country: string;
+  name: string;
+  latitude: string;
+  longitude: string;
+};
+
+export type CreateEventDto = {
+  description: string;
+  displayInSlider: boolean;
+  endDate: Date;
+  featuredImage: string;
+  keywords: string;
+  location: EventLocation;
+  price: string;
+  sliderPosition: number;
+  startDate: Date;
+  title: string;
+  topicId: number;
+};

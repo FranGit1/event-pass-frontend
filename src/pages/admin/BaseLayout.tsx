@@ -11,7 +11,6 @@ export const BaseLayout = () => {
       <div tw="flex-1">
         <Outlet />
       </div>
-      <Footer containerCss={[tw`hidden md:flex`]} />
     </div>
   );
 };

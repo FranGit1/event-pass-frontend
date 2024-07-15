@@ -1,18 +1,25 @@
-import { IFieldComponentBaseProps, Maybe } from '../../types';
+import { IFieldComponentBaseProps, Maybe } from "../../types";
 
-import ReactQuill from 'react-quill';
-import { css } from '@emotion/react';
-import tw from 'twin.macro';
-import { useState } from 'react';
+import ReactQuill from "react-quill";
+import { css } from "@emotion/react";
+import tw from "twin.macro";
+import { useState } from "react";
 
-export type IRichTextEditorProps = Omit<IFieldComponentBaseProps<string>, 'label' | 'required' | 'disabled'> & {
+export type IRichTextEditorProps = Omit<
+  IFieldComponentBaseProps<string>,
+  "label" | "required" | "disabled"
+> & {
   autofocus?: boolean;
 };
 
-const customQuillStyle = (o: { hasValue: boolean; hasError: boolean; isFocused: boolean }) => css`
+const customQuillStyle = (o: {
+  hasValue: boolean;
+  hasError: boolean;
+  isFocused: boolean;
+}) => css`
   .quill {
-    ${tw`bg-gray rounded-t-md`}
-    ${o.isFocused || o.hasError ? tw`` : tw`hover:bg-primary-500`};
+    ${tw`bg-white rounded-2xl border-2 border-gray-light`}
+    ${o.isFocused || o.hasError ? tw`border-primary` : tw``};
   }
 
   .ql-toolbar {
@@ -20,14 +27,15 @@ const customQuillStyle = (o: { hasValue: boolean; hasError: boolean; isFocused: 
     ${tw`hover:(border-b-primary-300)`}
   }
   .ql-container {
-    ${tw`border-l-0 border-r-0 border-b-1 border-b-gray-300 h-40 `}
-    ${tw`hover:(border-b-primary-300)`}
+    ${tw`border-0 h-40 `}
+    ${tw`hover:()`}
     
     
-    ${o.isFocused && tw`border-b-2 border-b-primary-100 hover:(border-b-2 border-b-primary-100)`}
-    ${o.hasError && tw`border-b-error border-b-2 hover:(border-b-error border-b-2)`}
-    
-    ${!o.hasError && o.hasValue && !o.isFocused && tw`border-b-primary-100 border-b-1`}
+    ${o.isFocused && tw` hover:()`}
+    ${o.hasError &&
+    tw`border-b-error border-b-2 hover:(border-b-error border-b-2)`}
+        ${!o.hasValue && tw`text-gray`}
+        ${!o.hasValue && o.isFocused && tw`text-gray-light`}
   }
   .ql-clipboard {
     ${tw`bg-white`}
@@ -89,8 +97,8 @@ const customQuillStyle = (o: { hasValue: boolean; hasError: boolean; isFocused: 
 `;
 
 export const parseRTEValue = (val: Maybe<string>) => {
-  const value = val ?? '';
-  return value.replace(/<(.|\n)*?>/g, '').trim();
+  const value = val ?? "";
+  return value.replace(/<(.|\n)*?>/g, "").trim();
 };
 export const RichTextEditor = (props: IRichTextEditorProps) => {
   const [isFocused, setIsFocused] = useState(props.autofocus ?? false);
@@ -103,7 +111,7 @@ export const RichTextEditor = (props: IRichTextEditorProps) => {
       css={customQuillStyle({
         hasError: props.error != null,
         hasValue,
-        isFocused
+        isFocused,
       })}
     >
       <ReactQuill

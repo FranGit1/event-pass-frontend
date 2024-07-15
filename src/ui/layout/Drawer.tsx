@@ -1,14 +1,14 @@
-import 'twin.macro';
+import "twin.macro";
 
-import { IComponentBaseProps, Maybe, TwinStyle } from '../../types';
+import { IComponentBaseProps, Maybe, TwinStyle } from "../../types";
 
-import { Freeze } from '../../components/Freeze';
-import { HiX } from 'react-icons/hi';
-import { IconButton } from '../buttons/IconButton';
-import { PropsWithChildren } from 'react';
-import ReactDrawer from 'rc-drawer';
-import tw from 'twin.macro';
-import LanguageSelect from '../../components/LanguageSelect';
+import { Freeze } from "../../components/Freeze";
+import { HiX } from "react-icons/hi";
+import { PropsWithChildren } from "react";
+import ReactDrawer from "rc-drawer";
+import tw from "twin.macro";
+import LanguageSelect from "../../components/LanguageSelect";
+import { IconButton } from "../buttons/IconButton";
 
 export interface IDrawerProps extends IComponentBaseProps {
   open: boolean;
@@ -44,7 +44,10 @@ export const Drawer = (props: PropsWithChildren<IDrawerProps>) => {
             icon={HiX}
             onClick={() => props.onClose()}
             iconCss={[tw`h-6 w-6 text-primary`, props.closeIconCss]}
-            containerCss={[tw`absolute right-4 top-4 z-[51]`, props.closeIconContainerCss]}
+            containerCss={[
+              tw`absolute right-4 top-4 z-[51]`,
+              props.closeIconContainerCss,
+            ]}
           />
           {props.showLanguageSelect && <LanguageSelect />}
         </div>

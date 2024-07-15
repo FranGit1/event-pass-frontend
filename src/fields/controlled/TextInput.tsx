@@ -1,15 +1,23 @@
-import 'twin.macro';
+import "twin.macro";
 
-import { IComponentBaseProps, Maybe, ReactComponent, TwinStyle } from '../../types';
+import {
+  IComponentBaseProps,
+  Maybe,
+  ReactComponent,
+  TwinStyle,
+} from "../../types";
 
-import { FieldLabel } from '../components/FieldLabel';
-import { PropsWithChildren } from 'react';
-import { addAsterisk } from '../../utils';
-import tw from 'twin.macro';
+import { FieldLabel } from "../components/FieldLabel";
+import { PropsWithChildren } from "react";
+import { addAsterisk } from "../../utils";
+import tw from "twin.macro";
 
 type BaseProps = Omit<
-  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-  'onChange' | 'value'
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >,
+  "onChange" | "value"
 > &
   IComponentBaseProps;
 
@@ -50,13 +58,19 @@ const BaseTextInput = ({
 
   return (
     <div css={[containerCss]}>
-      <FieldLabel isInErrorState={!!error} containerCss={[tw`mb-0.5 text-start`, inputProps.disabled && tw`text-gray`]}>
+      <FieldLabel
+        isInErrorState={!!error}
+        containerCss={[
+          tw`mb-0.5 text-start`,
+          inputProps.disabled && tw`text-gray`,
+        ]}
+      >
         {addAsterisk(inputProps.label, inputProps.required, !!error)}
       </FieldLabel>
       <div
         className="group"
         css={[
-          tw`flex flex-row items-center py-3 px-5 border-1 border-transparent   `,
+          tw`flex flex-row items-center py-3 px-5 border-2 border-transparent   `,
           tw`focus-within:(hover:(text-black)) `,
           !error && tw`hover:(border-2 border-primary bg-white text-primary)`,
           // error && tw`placeholder:(text-sold)`,
@@ -65,19 +79,29 @@ const BaseTextInput = ({
           inputProps.value && tw`hover:( text-black)`,
 
           inputProps.disabled && tw`cursor-not-allowed`,
-          inputProps.disabled && disabledCss
+          inputProps.disabled && disabledCss,
         ]}
         onClick={inputProps.onClick}
       >
         {Lead && <Lead css={leadStyle} containerCss={leadStyle} />}
         <input
           {...inputProps}
-          value={inputProps.value ?? ''}
-          type={(inputProps.type ?? 'text') as any}
+          value={inputProps.value ?? ""}
+          type={(inputProps.type ?? "text") as any}
           onChange={(e) => onChange(e.target.value)}
-          css={[tw`ring-0 outline-none flex-1 bg-inherit`, textCss, inputProps.disabled && tw`cursor-not-allowed`]}
+          css={[
+            tw`ring-0 outline-none flex-1 bg-inherit`,
+            textCss,
+            inputProps.disabled && tw`cursor-not-allowed`,
+          ]}
         />
-        {Trail && <Trail css={trailStyle} containerCss={trailStyle} onClick={onTrailIconClick} />}
+        {Trail && (
+          <Trail
+            css={trailStyle}
+            containerCss={trailStyle}
+            onClick={onTrailIconClick}
+          />
+        )}
       </div>
     </div>
   );
@@ -85,7 +109,12 @@ const BaseTextInput = ({
 
 export type ITextInputProps = Omit<
   IBaseTextInputProps,
-  'inputCss' | 'focusedCss' | 'bluredCss' | 'errorCss' | 'textCss' | 'disabledCss'
+  | "inputCss"
+  | "focusedCss"
+  | "bluredCss"
+  | "errorCss"
+  | "textCss"
+  | "disabledCss"
 >;
 
 export const TextInput = {
@@ -96,10 +125,10 @@ export const TextInput = {
         {...rest}
         error={error}
         inputCss={[
-          tw`rounded-md bg-white border-1 border-gray`,
-          tw`focus-within:(border-2 border-primary bg-white ring-2 ring-primary-400)`,
+          tw`rounded-full bg-white border-2 border-gray-light`,
+          tw`focus-within:(border-2 border-primary bg-white )`,
           props.error && tw`focus-within:(ring-error-light)`,
-          props.error && tw`focus-within:ring-error-light`
+          props.error && tw`focus-within:ring-error-light`,
         ]}
         errorCss={[tw`border-error`]}
         leadCss={[
@@ -107,12 +136,16 @@ export const TextInput = {
           tw`group-focus:text-primary `,
           props.disabled && tw`text-gray`,
           props.onBlur && props.value && !props.disabled && tw`text-gray-100`,
-          leadCss
+          leadCss,
         ]}
-        trailCss={[tw`group-focus-within:text-primary text-gray-400`, props.disabled && tw`text-gray`, trailCss]}
+        trailCss={[
+          tw`group-focus-within:text-primary text-gray-400`,
+          props.disabled && tw`text-gray`,
+          trailCss,
+        ]}
         textCss={[
           tw`group-focus-within:(placeholder:(text-black) text-black) text-body font-400 -tracking-0.03 text-gray placeholder:(text-black)`,
-          props.disabled && tw`text-gray placeholder:text-gray`
+          props.disabled && tw`text-gray placeholder:text-gray`,
         ]}
         disabledCss={[tw`bg-white border-gray hover:(bg-white  border-gray )`]}
       >
@@ -130,7 +163,7 @@ export const TextInput = {
           tw`rounded-md bg-white border-1 border-gray`,
           tw`focus-within:(border-2 border-primary bg-white ring-2 ring-primary-400)`,
           props.error && tw`focus-within:(ring-error-light)`,
-          props.error && tw`focus-within:ring-error-light`
+          props.error && tw`focus-within:ring-error-light`,
         ]}
         errorCss={[tw`border-error`]}
         leadCss={[
@@ -138,12 +171,16 @@ export const TextInput = {
           tw`group-focus:text-primary `,
           props.disabled && tw`text-gray`,
           props.onBlur && props.value && !props.disabled && tw`text-gray-100`,
-          leadCss
+          leadCss,
         ]}
-        trailCss={[tw`group-focus-within:text-primary text-gray-400`, props.disabled && tw`text-gray`, trailCss]}
+        trailCss={[
+          tw`group-focus-within:text-primary text-gray-400`,
+          props.disabled && tw`text-gray`,
+          trailCss,
+        ]}
         textCss={[
           tw`group-focus-within:(placeholder:(text-gray-100) text-gray-100) text-body font-400 -tracking-0.03 text-black placeholder:(text-gray-300)`,
-          props.disabled && tw`text-gray placeholder:text-gray`
+          props.disabled && tw`text-gray placeholder:text-gray`,
         ]}
         disabledCss={[tw`bg-white border-gray hover:(bg-white  border-gray )`]}
       >
@@ -161,7 +198,7 @@ export const TextInput = {
           tw`rounded-full bg-white border-2 border-gray-light`,
           tw`focus-within:(border-2 border-primary bg-white)`,
           props.error && tw`focus-within:(ring-error-light)`,
-          props.error && tw`focus-within:ring-error-light`
+          props.error && tw`focus-within:ring-error-light`,
         ]}
         errorCss={[tw`border-error`]}
         leadCss={[
@@ -169,7 +206,7 @@ export const TextInput = {
           tw`group-focus:text-primary `,
           props.disabled && tw`text-gray`,
           props.onBlur && props.value && !props.disabled && tw`text-gray-100`,
-          leadCss
+          leadCss,
         ]}
         trailCss={[
           tw`group-focus-within:text-primary text-gray-400`,
@@ -181,12 +218,12 @@ export const TextInput = {
         textCss={[
           tw`group-focus-within:(placeholder:(text-gray-light) text-gray) -tracking-0.03  text-gray font-normal placeholder:(text-gray )`,
           props.disabled && tw`text-gray placeholder:text-gray`,
-          props.error && tw`text-black placeholder:text-black`
+          props.error && tw`text-black placeholder:text-black`,
         ]}
         disabledCss={[tw`bg-white border-gray hover:(bg-white  border-gray )`]}
       >
         {props.children}
       </BaseTextInput>
     );
-  }
+  },
 };
