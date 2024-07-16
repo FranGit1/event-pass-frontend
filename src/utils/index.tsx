@@ -1,7 +1,7 @@
-import { format } from "date-fns";
+import { format, isBefore, parseISO } from "date-fns";
 import React, { FunctionComponent, SVGProps } from "react";
 import tw from "twin.macro";
-import { CreateEventDto, Maybe } from "../types";
+import { CreateEventDto, EventResDto, Maybe } from "../types";
 
 export const errorMessageStrings = {
   passwordRequired: "passwordRequiredError",
@@ -39,11 +39,16 @@ interface IFormatDateOptions {
   uppercase?: boolean;
 }
 
-export function formatDate(date: Date, options?: IFormatDateOptions) {
-  const { dateFormat = "yyyy-MM-dd", uppercase = false } = options || {};
-  const startDate = format(date, dateFormat);
+export function formatDate(
+  dateString: string,
+  options?: { dateFormat?: string; uppercase?: boolean }
+) {
+  const { dateFormat = "dd.MM.yyyy", uppercase = false } = options || {};
 
-  return uppercase ? startDate.toUpperCase() : startDate;
+  const date = parseISO(dateString);
+  const formattedDate = format(date, dateFormat);
+
+  return uppercase ? formattedDate.toUpperCase() : formattedDate;
 }
 
 export function getInitialsFromName(name: string) {
@@ -117,4 +122,17 @@ export const transformEvent = (event: any): CreateEventDto => {
     description: event.description,
     title: event.title,
   };
+};
+
+export const separateEvents = (events: EventResDto[]) => {
+  const now = new Date();
+
+  const pastEvents = events.filter((event) =>
+    isBefore(parseISO(event.endDate), now)
+  );
+  const upcomingEvents = events.filter(
+    (event) => !isBefore(parseISO(event.endDate), now)
+  );
+
+  return { pastEvents, upcomingEvents };
 };

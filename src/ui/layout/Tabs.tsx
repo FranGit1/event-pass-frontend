@@ -6,14 +6,14 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
-} from 'react';
+  useState,
+} from "react";
 
-import { IconType } from 'react-icons';
-import tw from 'twin.macro';
-import { IComponentBaseProps, Maybe, TwinStyle } from '../../types';
-import { Chip } from '../buttons/Chip';
-import { Typography } from '../Typography';
+import { IconType } from "react-icons";
+import tw from "twin.macro";
+import { IComponentBaseProps, Maybe, TwinStyle } from "../../types";
+import { Chip } from "../buttons/Chip";
+import { Typography } from "../Typography";
 
 interface ITabItemProps extends IComponentBaseProps {
   text: string;
@@ -34,7 +34,7 @@ const horizontalMargin = 15;
 
 export type ITabItemPropsPublic = Omit<
   ITabItemProps,
-  'onClick' | 'isLast' | 'isFirst' | 'onFocus' | 'isSelected' | 'index'
+  "onClick" | "isLast" | "isFirst" | "onFocus" | "isSelected" | "index"
 >;
 
 const TabItem = (props: ITabItemProps) => {
@@ -51,7 +51,7 @@ const TabItem = (props: ITabItemProps) => {
         !props.isSelected && tw`hover:(border-b-primary)`,
         props.isSelected && tw`border-b-primary`,
         props.tabFullWidth && tw`w-1/2`,
-        tw`cursor-pointer text-gray`
+        tw`cursor-pointer text-gray`,
       ]}
       style={{ marginRight: horizontalMargin }}
       onClick={(e) => {
@@ -64,7 +64,7 @@ const TabItem = (props: ITabItemProps) => {
       <Typography.ButtonPrimary
         containerCss={[
           tw`font-400 text-sm md:text-body group-hover:(text-primary) transition-colors duration-300 ease-in-out`,
-          props.isSelected && tw`text-primary`
+          props.isSelected && tw`text-primary`,
         ]}
       >
         {props.text}
@@ -79,7 +79,9 @@ const TabItem = (props: ITabItemProps) => {
         />
       )}
       {Trail && <Trail tw="ml-2 w-4 h-4" />}
-      {props.isSelected && <div tw="bg-primary h-1 w-full absolute bottom-[-0.234rem] rounded-full" />}
+      {props.isSelected && (
+        <div tw="bg-primary h-1 w-full absolute bottom-[-0.234rem] rounded-full" />
+      )}
       {!props.isSelected && !props.hideBorderBottom && (
         <div tw="bg-gray-light h-1 w-full absolute bottom-[-0.234rem] rounded-full group-hover:(bg-primary) transition-colors duration-300 ease-in-out" />
       )}
@@ -125,14 +127,16 @@ const Tabs: React.FC<PropsWithChildren<ITabsProps>> & {
         isLast: index + 1 === children.length,
         index,
         onClick: () => onChange(index),
-        onFocus: () => setLineAtIndex(index)
+        onFocus: () => setLineAtIndex(index),
       })
     ) ?? [];
 
   const components = children.map((c: any) => c.props.children);
 
   useEffect(() => {
-    const tabWidthsInside = Array.from(tabRef?.current?.children ?? []).map((c) => c.clientWidth);
+    const tabWidthsInside = Array.from(tabRef?.current?.children ?? []).map(
+      (c) => c.clientWidth
+    );
     if (tabWidths.length !== tabWidthsInside.length) {
       setTabWidth(tabWidthsInside);
     }
@@ -151,7 +155,10 @@ const Tabs: React.FC<PropsWithChildren<ITabsProps>> & {
         components.map((c, i) => {
           return (
             activeIndex == i && (
-              <div key={i} css={[tw`h-fit my-12 px-12`, props.componentWrapperCss]}>
+              <div
+                key={i}
+                css={[tw`h-fit my-12 px-12`, props.componentWrapperCss]}
+              >
                 {c}
               </div>
             )
@@ -160,25 +167,28 @@ const Tabs: React.FC<PropsWithChildren<ITabsProps>> & {
       <div
         css={[
           tw`flex flex-col items-center justify-between h-14 max-w-screen-xl m-auto`,
-          props.showTabOnTop && tw`items-start ml-0`,
+          props.showTabOnTop && tw`items-start ml-18`,
           props.showTabsCenter && tw`items-center ml-0`,
           props.containerCss,
           tw`lg:pl-5 pr-5`,
-          tw`xl:pl-0 pr-0`
+          tw`xl:pl-0 pr-0`,
         ]}
       >
         {leftComponent}
         {/*  add w-full is layout breaks when centering tabs */}
 
         <div css={[props.showTabsCenter && tw`w-full`]}>
-          <div ref={tabRef} css={[tw`flex flex-row items-center justify-between `]}>
+          <div
+            ref={tabRef}
+            css={[tw`flex flex-row items-center justify-between `]}
+          >
             {tabs}
           </div>
           <div
             css={[tw``]}
             style={{
               transform: `translateX(${totalWidth}px)`,
-              width: tabWidths[lineAtIndex] ?? 0
+              width: tabWidths[lineAtIndex] ?? 0,
             }}
           />
         </div>
@@ -189,7 +199,13 @@ const Tabs: React.FC<PropsWithChildren<ITabsProps>> & {
         components.map((c, i) => {
           return (
             activeIndex == i && (
-              <div key={i} css={[tw`h-fit p-0 pb-0 pt-6 md:p-12`, props.showTabsCenter && tw`md:px-0`]}>
+              <div
+                key={i}
+                css={[
+                  tw`h-fit p-0 pb-0 pt-6 md:p-12`,
+                  props.showTabsCenter && tw`md:px-0`,
+                ]}
+              >
                 {c}
               </div>
             )

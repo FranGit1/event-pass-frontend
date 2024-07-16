@@ -1,6 +1,12 @@
 import axios from "axios";
 import { config } from "./config";
-import { CreateEventDto, LoginForm, Organization, RegisterForm } from "./types";
+import {
+  CreateEventDto,
+  EventResDto,
+  LoginForm,
+  Organization,
+  RegisterForm,
+} from "./types";
 
 const axiosPublic = axios.create({
   baseURL: `${config.VITE_APP_BACKEND_URL}/api`,
@@ -70,7 +76,9 @@ class HTTP {
       throw error;
     }
   };
-  getEventsByOrganization = async (id: number): Promise<Organization[]> => {
+  getEventsByOrganization = async (
+    id: number
+  ): Promise<{ events: EventResDto[]; organization: Organization }> => {
     try {
       const response = await axiosPublic.get(
         `events/events-by-organization/${id}`

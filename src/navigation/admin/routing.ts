@@ -27,23 +27,13 @@ export const routes = {
 
 export const organizationSideBarItems: SidebarItem[] = [
   {
-    url: "",
+    url: `/admin/organization/${routes.organization.organizationEvents}`,
     icons: { unselected: BsFillPhoneFill },
-    label: "Zahtjevi",
+    label: "My events",
   },
   {
-    url: "",
+    url: `/admin/${routes.organizations}`,
     icons: { unselected: BsFillPhoneFill },
-    label: "Organizacije",
-  },
-  {
-    url: "",
-    icons: { unselected: BsFillPhoneFill },
-    label: "Osobe",
-  },
-  {
-    url: "routes.atheleteForm.affiliation",
-    icons: { unselected: BsFillPhoneFill },
-    label: "Slanje pošte",
+    label: "Organizations",
   },
 ];

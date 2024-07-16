@@ -87,9 +87,12 @@ export type Organization = {
   slug: string;
   organizerDescription: string | null;
   organizerFacebook: string | null;
+  organizerLogo: string | null;
   organizerEmail: string | null;
   organizerLink: string | null;
   organizerInstagram: string | null;
+  liveEventsCount: number;
+  legalName: string;
 };
 
 type EventLocation = {
@@ -98,6 +101,22 @@ type EventLocation = {
   name: string;
   latitude: string;
   longitude: string;
+};
+
+export type EventResDto = {
+  id: number;
+  organizer: string;
+  title: string;
+  description: string;
+  location: EventLocation;
+  price: number;
+  topic: string;
+  startDate: string;
+  endDate: string;
+  keywords: string;
+  featuredImage: string;
+  displayInSlider: boolean;
+  sliderPosition: number;
 };
 
 export type CreateEventDto = {
