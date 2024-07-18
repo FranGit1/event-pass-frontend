@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import { User } from '../types';
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+import { User } from "../types";
 
 interface AuthContextType {
   auth: User;
@@ -8,7 +8,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({
   auth: {},
-  setAuth: () => {}
+  setAuth: () => {},
 });
 
 interface AuthProviderProps {
@@ -17,9 +17,9 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState<User>(() => {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = localStorage.getItem("token");
 
-    const userString = localStorage.getItem('user');
+    const userString = localStorage.getItem("user");
 
     if (storedToken && userString) {
       const { email, name } = JSON.parse(userString);
@@ -30,14 +30,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (auth.token) {
-      localStorage.setItem('token', auth.token);
+      console.log("called");
+
+      localStorage.setItem("token", auth.token);
     } else {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     }
   }, [auth.token]);
 
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ auth, setAuth }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;

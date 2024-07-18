@@ -60,6 +60,7 @@ export const LoginPage = () => {
       if (token) {
         isSuccessfull = await validateRecaptcha.mutateAsync(token);
       }
+
       reCaptchaRef.current.reset();
       const user = await http.login(values);
 

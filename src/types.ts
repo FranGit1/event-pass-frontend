@@ -132,3 +132,10 @@ export type CreateEventDto = {
   title: string;
   topicId: number;
 };
+
+export interface User {
+  email?: string;
+  name?: string;
+  token?: string;
+  id?: number;
+}
