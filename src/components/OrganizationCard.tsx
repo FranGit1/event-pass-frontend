@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useNavigation } from "../hooks/use-navigation";
 import { routes } from "../navigation/admin/routing";
 import { Organization } from "../types";
@@ -12,6 +13,7 @@ interface IOrganizationCardProps {
 
 export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
   const { navigate } = useNavigation();
+  const { t } = useTranslation();
   return (
     <div tw="w-100 rounded-3xl border-1 border-gray-400 ">
       <div
@@ -45,14 +47,14 @@ export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
       </div>
       <div tw="flex flex-row items-center justify-between p-4">
         <Typography.FooterText>
-          {organization.liveEventsCount} live events
+          {organization.liveEventsCount} {t("liveEvents")}
         </Typography.FooterText>
         <Button.Contained
           onClick={() =>
             navigate(`/admin/${routes.eventCreation.base}/${organization.id}`)
           }
         >
-          Create event
+          {t("createEvent")}{" "}
         </Button.Contained>
       </div>
     </div>

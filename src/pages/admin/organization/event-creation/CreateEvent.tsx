@@ -17,6 +17,8 @@ import { useMutation } from "@tanstack/react-query";
 import { http } from "../../../../http";
 import { CreateEventDto } from "../../../../types";
 import { useParams } from "react-router-dom";
+import { IoChevronBack } from "react-icons/io5";
+import { routes } from "../../../../navigation/admin/routing";
 
 export const CreateEventData = () => {
   const data = {};
@@ -67,18 +69,29 @@ export const CreateEventForm = (props: ICreateEventFormProps) => {
   };
 
   return (
-    <div tw="px-12 py-4 mb-20">
+    <div tw="px-12 py-4 mb-20 flex flex-col">
       <FormProvider {...createEventDataForm}>
         <Typography.H3>{t("Create new event")}</Typography.H3>
-        <Button.Contained
-          onClick={() => {
-            console.log(createEventDataForm.formState.errors);
+        <div tw="w-full flex flex-row justify-between items-center my-10">
+          <Button.Text
+            containerCss={[tw` self-start min-w-0 pl-0 md:flex`]}
+            lead={IoChevronBack}
+            onClick={() => {
+              navigate(routes.base);
+            }}
+          >
+            {t("back")}
+          </Button.Text>
 
-            onSubmit();
-          }}
-        >
-          Create Event
-        </Button.Contained>
+          <Button.Contained
+            containerCss={[tw`self-end`]}
+            onClick={() => {
+              onSubmit();
+            }}
+          >
+            Create Event
+          </Button.Contained>
+        </div>
         <div tw="flex flex-col gap-y-6 mt-8">
           <Form.TextInput.Rounded
             name="eventData.title"

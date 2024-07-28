@@ -41,12 +41,10 @@ export const RegisterPage = () => {
       .email(t(errorMessageStrings.emailBadFormat)),
     firstName: yup.string().required(t(errorMessageStrings.firstNameRequired)),
     lastName: yup.string().required(t(errorMessageStrings.lastNameRequired)),
-    password: yup
-      .string()
-      .required(t(errorMessageStrings.passwordRequired))
-      .min(8, t(errorMessageStrings.passwordBadFormat))
-      .matches(/[A-Z]/, t(errorMessageStrings.passwordBadFormat))
-      .matches(/[0-9]/, t(errorMessageStrings.passwordBadFormat)),
+    password: yup.string().required(t(errorMessageStrings.passwordRequired)),
+    // .min(8, t(errorMessageStrings.passwordBadFormat))
+    // .matches(/[A-Z]/, t(errorMessageStrings.passwordBadFormat))
+    // .matches(/[0-9]/, t(errorMessageStrings.passwordBadFormat)),
     repeatPassword: yup
       .string()
       .required(t(errorMessageStrings.repeatPasswordRequired))
@@ -54,6 +52,9 @@ export const RegisterPage = () => {
         [yup.ref("password"), ""],
         t(errorMessageStrings.repeatPasswordMustMatch)
       ),
+    username: yup.string().required(t(errorMessageStrings.lastNameRequired)),
+    companyName: yup.string().required(t(errorMessageStrings.lastNameRequired)),
+    contactInfo: yup.string().required(t(errorMessageStrings.lastNameRequired)),
   });
 
   type IFormRegister = yup.InferType<typeof schema>;
@@ -63,6 +64,9 @@ export const RegisterPage = () => {
       email: "",
       password: "",
       repeatPassword: "",
+      username: "",
+      companyName: "",
+      contactInfo: "",
     },
     //@ts-ignore
     resolver: yupResolver(schema),
@@ -77,6 +81,7 @@ export const RegisterPage = () => {
         isSuccessfull = await validateRecaptcha.mutateAsync(token);
       }
       reCaptchaRef.current.reset();
+      console.log(values);
 
       if ((token && isSuccessfull) || !token) {
         const response = await http.register(
@@ -106,14 +111,14 @@ export const RegisterPage = () => {
             label={t("name")}
             placeholder={t("namePlaceholder")}
             required={true}
-            tw="w-full md:w-full lg:w-1/2" // Set width to 50% of the parent container
+            tw="w-full md:w-full lg:w-1/2"
           />
           <Form.TextInput.Rounded
             name="lastName"
             label={t("surname")}
             placeholder={t("surnamePlaceholder")}
             required={true}
-            tw="w-full md:w-full lg:w-1/2" // Set width to 50% of the parent container
+            tw="w-full md:w-full lg:w-1/2"
           />
         </div>
 
@@ -123,6 +128,30 @@ export const RegisterPage = () => {
           placeholder={t("emailPlaceholder")}
           type="email"
           required={true}
+        />
+
+        <Form.TextInput.Rounded
+          name="username"
+          label={t("username")}
+          placeholder={t("usernamePlaceholder")}
+          required={true}
+          tw="w-full md:w-full lg:w-1/2"
+        />
+
+        <Form.TextInput.Rounded
+          name="companyName"
+          label={t("companyName")}
+          placeholder={t("companyNamePlaceholder")}
+          required={true}
+          tw="w-full md:w-full lg:w-1/2"
+        />
+
+        <Form.TextInput.Rounded
+          name="contactInfo"
+          label={t("contactInfo")}
+          placeholder={t("contactInfoPlaceholder")}
+          required={true}
+          tw="w-full md:w-full lg:w-1/2"
         />
         <div
           tw="w-full relative"
@@ -189,6 +218,12 @@ export const RegisterPage = () => {
           </span>
           .
         </Typography.Notice>
+        <ReCAPTCHA
+          sitekey={config.recaptchaSiteKey}
+          ref={reCaptchaRef}
+          tw="self-center my-8"
+        />
+
         <Button.Contained
           allowLoader
           containerCss={[
@@ -199,11 +234,6 @@ export const RegisterPage = () => {
           {t("signUp")}
         </Button.Contained>
       </form>
-      <ReCAPTCHA
-        sitekey={config.recaptchaSiteKey}
-        ref={reCaptchaRef}
-        size="invisible"
-      />
     </FormProvider>
   );
 };

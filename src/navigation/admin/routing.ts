@@ -10,6 +10,8 @@ export const routes = {
     base: "organization",
     overview: ":organizationId",
     organizationEvents: ":organizationId/events",
+    joinOrganization: "join-organization",
+    generateJoinCode: "join-code-generation",
   },
 
   // organization: "organization/:",

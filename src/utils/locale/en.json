@@ -1,3 +1,16 @@
 {
-  "translation": {}
+  "translation": {
+    "joinOrganization": "Join organiztion",
+    "invitationCode": "Invitation code",
+    "generateCode": "Generate organiztion invitation code",
+    "successJoin": "Successfully joined new organiztion",
+    "back": "Back",
+    "myProfile": "My profile",
+    "home": "Home",
+    "settings": "Settings",
+    "signOut": "Sign out",
+    "createEvent": "Create event",
+    "liveEvents": "live events",
+    "yourOrganizations": "Your organizations"
+  }
 }

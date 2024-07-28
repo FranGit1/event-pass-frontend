@@ -18,8 +18,7 @@ import { routes } from "../../navigation/admin/routing";
 export interface IHeaderProps extends IComponentBaseProps {}
 
 export const Header = (props: IHeaderProps) => {
-  const { navigateBuyerHome, navigate, navigateWithSlug, location } =
-    useNavigation();
+  const { navigate, location } = useNavigation();
   const { slug } = useParams();
   const [open, { toggle, off }] = useBoolean(false);
   const isMobile = useMedia("(max-width: 1200px)");
@@ -61,7 +60,7 @@ export const Header = (props: IHeaderProps) => {
 
           <Button.Text
             onClick={() =>
-              auth.token ? toggle() : navigateWithSlug("routes.auth.login")
+              auth.token ? toggle() : navigate(routes.auth.login)
             }
             containerCss={[tw`hidden md:block`, isHomePage && tw`hidden`]}
             leadCss={[tw`text-primary h-6 w-6`]}

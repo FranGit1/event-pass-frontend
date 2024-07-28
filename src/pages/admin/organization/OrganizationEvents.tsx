@@ -7,10 +7,18 @@ import tw from "twin.macro";
 import { Tabs } from "../../../ui/layout/Tabs";
 import { separateEvents } from "../../../utils";
 import { Typography } from "../../../ui/Typography";
+import { Button } from "../../../ui/buttons/Button";
+import { useMutation } from "@tanstack/react-query";
+import { http } from "../../../http";
+import { useNavigation } from "../../../hooks/use-navigation";
+import { routes } from "../../../navigation/admin/routing";
+import { IoChevronBack } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 export const OrganizationEvents = () => {
   const { organizationId } = useParams();
-
+  const { navigate } = useNavigation();
+  const { t } = useTranslation();
   const { data, isFetched } = useGetOrganizationEvents(
     Number(organizationId) | 0
   );
@@ -18,15 +26,42 @@ export const OrganizationEvents = () => {
   const events: EventResDto[] = data?.events || [];
   const { pastEvents, upcomingEvents } = separateEvents(events);
 
+  const leaveOrganizationMutation = useMutation({
+    mutationFn: () => http.leaveOrganization(Number(organizationId)),
+    onSuccess: (response) => {
+      navigate(routes.base);
+    },
+  });
+
   return isFetched ? (
     <PageContainer containerCss={[tw`w-1/2 ml-0 mt-14 pl-0!`]}>
-      <div tw="flex items-center ml-16">
-        <img
-          src={organization?.organizerLogo ? organization.organizerLogo : ""}
-          tw="w-20 h-20"
-        />
+      <Button.Text
+        containerCss={[tw` self-start mt-10 pb-4 hidden min-w-0 pl-16 md:flex`]}
+        lead={IoChevronBack}
+        onClick={() => {
+          navigate(routes.base);
+        }}
+      >
+        {t("back")}
+      </Button.Text>
 
-        <Typography.H2>{organization?.title}</Typography.H2>
+      <div tw="flex flex-col  ml-16">
+        <div tw="flex items-center">
+          <img
+            src={organization?.organizerLogo ? organization.organizerLogo : ""}
+            tw="w-20 h-20"
+          />
+
+          <Typography.H2>{organization?.title}</Typography.H2>
+        </div>
+        <Button.Contained
+          containerCss={[tw`w-fit mt-4`]}
+          onClick={() => {
+            leaveOrganizationMutation.mutateAsync();
+          }}
+        >
+          Leave organization
+        </Button.Contained>
       </div>
 
       <Tabs

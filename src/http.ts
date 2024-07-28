@@ -5,6 +5,7 @@ import {
   EventResDto,
   LoginForm,
   Organization,
+  OrganizationsForSearch,
   RegisterForm,
 } from "./types";
 
@@ -41,6 +42,7 @@ class HTTP {
     const email = response?.data?.email;
     const name = response?.data?.name;
     const userObject = {
+      id: userId,
       email: email,
       name: name,
     };
@@ -54,7 +56,7 @@ class HTTP {
   };
 
   register = async (credentials: RegisterForm, language: string) => {
-    const response = await axiosPublic.post("/auth/register", {
+    const response = await axiosPublic.post("/auth/register-organizer", {
       ...credentials,
       language,
     });
@@ -64,12 +66,10 @@ class HTTP {
     }
   };
 
-  getComplexBuildingsAndUnitTypes = async (
-    id: number
-  ): Promise<Organization[]> => {
+  getComplexBuildingsAndUnitTypes = async (): Promise<Organization[]> => {
     try {
-      const response = await axiosPublic.get(
-        `organizations/organizations-by-organizer/${id}`
+      const response = await axiosAuthenticated.get(
+        `organizations/organizations-by-organizer`
       );
       return response.data.payload;
     } catch (error) {
@@ -88,6 +88,16 @@ class HTTP {
       throw error;
     }
   };
+  getAllOrganizations = async (): Promise<OrganizationsForSearch[]> => {
+    try {
+      const response = await axiosPublic.get(
+        `organizations/get/all-organizations`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
 
   createNewEvent = async (
     eventData: CreateEventDto,
@@ -99,6 +109,39 @@ class HTTP {
         eventData
       );
       return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  joinOrganizationViaCode = async (organizationCode: string) => {
+    try {
+      const response = await axiosAuthenticated.post(`organizations/join`, {
+        code: organizationCode,
+      });
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  generateOrganizationCode = async (organizationId: number) => {
+    try {
+      const response = await axiosAuthenticated.post(
+        `organizations/generate-code/${organizationId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  leaveOrganization = async (organizationId: number) => {
+    try {
+      const response = await axiosAuthenticated.post(
+        `organizations/leave-organization/${organizationId}`
+      );
+      return response.data;
     } catch (error) {
       throw error;
     }

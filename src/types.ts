@@ -102,6 +102,10 @@ type EventLocation = {
   latitude: string;
   longitude: string;
 };
+export type OrganizationsForSearch = {
+  title: string;
+  id: number;
+};
 
 export type EventResDto = {
   id: number;

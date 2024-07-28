@@ -11,6 +11,7 @@ export const queryKeys = {
   isAuthenticated: "isAuthenticated",
   organizationsByOrganizer: "organizationsByOrganizer",
   eventsByOrganization: "eventsByOrganization",
+  allOrganizations: "allOrganizations",
 };
 
 export const useIsAuthenticated = () => {
@@ -20,11 +21,11 @@ export const useIsAuthenticated = () => {
   });
 };
 
-export const useGetComplexBuildingsAndUnitTypes = (id: number) => {
+export const useGetComplexBuildingsAndUnitTypes = () => {
   return useQuery({
-    queryKey: [queryKeys.organizationsByOrganizer, id],
+    queryKey: [queryKeys.organizationsByOrganizer],
     queryFn: async () => {
-      return http.getComplexBuildingsAndUnitTypes(id);
+      return http.getComplexBuildingsAndUnitTypes();
     },
     staleTime: 0,
   });
@@ -34,6 +35,15 @@ export const useGetOrganizationEvents = (id: number) => {
     queryKey: [queryKeys.eventsByOrganization, id],
     queryFn: async () => {
       return http.getEventsByOrganization(id);
+    },
+    staleTime: 0,
+  });
+};
+export const useGetAllOrganizations = () => {
+  return useQuery({
+    queryKey: [queryKeys.allOrganizations],
+    queryFn: async () => {
+      return http.getAllOrganizations();
     },
     staleTime: 0,
   });

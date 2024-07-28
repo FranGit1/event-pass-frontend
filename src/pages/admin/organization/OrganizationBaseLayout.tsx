@@ -8,7 +8,7 @@ interface IBaseAdminnProps extends IComponentBaseProps {}
 
 export const OrganizationBaseLayout = ({}: IBaseAdminnProps) => {
   return (
-    <div tw="min-h-screen flex flex-col ">
+    <div tw="min-h-screen flex flex-col">
       <div tw="h-full flex flex-row w-full">
         <SidebarNavigation sidebarItems={organizationSideBarItems} />
         <Outlet />

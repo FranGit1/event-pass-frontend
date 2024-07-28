@@ -1,6 +1,6 @@
-import { FocusEventHandler, useCallback } from 'react';
-import { HiChevronDown, HiChevronUp, HiSearch } from 'react-icons/hi';
-import { IFieldComponentBaseProps, IOption, Maybe } from '../../types';
+import { FocusEventHandler, useCallback } from "react";
+import { HiChevronDown, HiChevronUp, HiSearch } from "react-icons/hi";
+import { IFieldComponentBaseProps, IOption, Maybe } from "../../types";
 
 import ReactSelect, {
   components as Components,
@@ -11,24 +11,24 @@ import ReactSelect, {
   MenuProps,
   PlaceholderProps,
   SingleValueProps,
-  ValueContainerProps
-} from 'react-select';
+  ValueContainerProps,
+} from "react-select";
 
-import { AiFillCloseCircle } from 'react-icons/ai';
-import { FieldLabel } from '../components/FieldLabel';
-import { Typography } from '../../ui/Typography';
-import { addAsterisk } from '../../utils';
-import { css } from '@emotion/react';
-import tw from 'twin.macro';
+import { AiFillCloseCircle } from "react-icons/ai";
+import { FieldLabel } from "../components/FieldLabel";
+import { Typography } from "../../ui/Typography";
+import { addAsterisk } from "../../utils";
+import { css } from "@emotion/react";
+import tw from "twin.macro";
 
 const CustomMenuList = (props: MenuListProps) => {
   const {
     selectOption,
-    selectProps: { value, inputValue, isSearchable }
+    selectProps: { value, inputValue, isSearchable },
   } = props;
   const options = props.options as unknown as IOption<any>[];
   const selectedOption = value as IOption<any>;
-  const term = (inputValue ?? '').toLowerCase().trim();
+  const term = (inputValue ?? "").toLowerCase().trim();
   const filteredOptions = isSearchable
     ? options.filter(({ label }: IOption<any>) => {
         return label.toLowerCase().trim().includes(term);
@@ -38,7 +38,9 @@ const CustomMenuList = (props: MenuListProps) => {
     <Components.MenuList {...props} tw="shadow-none">
       {filteredOptions.length === 0 ? (
         <div tw="cursor-auto">
-          <Typography.Caption containerCss={[tw`text-gray-100 py-1 px-3`]}>No results</Typography.Caption>
+          <Typography.Caption containerCss={[tw`text-gray-100 py-1 px-3`]}>
+            No results
+          </Typography.Caption>
         </div>
       ) : (
         <div css={[tw`cursor-pointer `]}>
@@ -52,12 +54,15 @@ const CustomMenuList = (props: MenuListProps) => {
                   tw`px-3 py-1`,
                   tw`bg-white text-gray-400`,
                   tw`hover:(text-primary border-l-3)`,
-                  isSelected && tw`bg-primary text-white  hover:(bg-primary text-white)`
+                  isSelected &&
+                    tw`bg-primary text-white  hover:(bg-primary text-white)`,
                 ]}
                 key={o.value}
                 onClick={() => selectOption(o)}
               >
-                <Typography.Caption containerCss={[tw`text-inherit`]}>{o.label}</Typography.Caption>
+                <Typography.Caption containerCss={[tw`text-inherit`]}>
+                  {o.label}
+                </Typography.Caption>
               </div>
             );
           })}
@@ -75,7 +80,7 @@ const CustomPlaceholder = (props: PlaceholderProps) => {
           ${tw`text-black overflow-hidden ml-0.5`}
           ${props.selectProps.isDisabled && tw`text-gray-100`}
           ${props.isFocused && tw`text-gray-100`}
-        `
+        `,
       ]}
     >
       {props.selectProps.placeholder}
@@ -88,7 +93,7 @@ const CustomIndicatorsContainer = (props: IndicatorsContainerProps) => {
     clearValue,
     hasValue,
 
-    selectProps: { menuIsOpen, isClearable }
+    selectProps: { menuIsOpen, isClearable },
   } = props;
 
   const DropdownIcon = menuIsOpen ? HiChevronUp : HiChevronDown;
@@ -103,10 +108,18 @@ const CustomIndicatorsContainer = (props: IndicatorsContainerProps) => {
             e.stopPropagation();
           }}
           onClick={clearValue}
-          css={[tw`h-6 w-6 text-gray cursor-pointer`, props.selectProps.isDisabled && tw`text-gray-100`]}
+          css={[
+            tw`h-6 w-6 text-gray cursor-pointer`,
+            props.selectProps.isDisabled && tw`text-gray-100`,
+          ]}
         />
       )}
-      <DropdownIcon css={[tw`h-6 w-6 text-gray-400`, props.selectProps.isDisabled && tw`text-gray-100`]} />
+      <DropdownIcon
+        css={[
+          tw`h-6 w-6 text-gray-400`,
+          props.selectProps.isDisabled && tw`text-gray-100`,
+        ]}
+      />
     </div>
   );
 };
@@ -116,7 +129,7 @@ const CustomInput = (props: InputProps) => {
 
 const CustomSingleValue = (props: SingleValueProps) => {
   const {
-    selectProps: { value, isDisabled, isOptionSelected }
+    selectProps: { value, isDisabled, isOptionSelected },
   } = props;
   const selectedOption = value as IOption<any>;
 
@@ -128,14 +141,17 @@ const CustomSingleValue = (props: SingleValueProps) => {
           ${tw`text-primary-400 overflow-hidden ml-0.5`}
           ${isDisabled && tw`text-gray-100`}
           ${isOptionSelected && tw`text-primary`}
-        `
+        `,
       ]}
     >
       {selectedOption?.label}
     </Typography.Caption>
   );
 };
-const CustomControl = ({ children, ...props }: ControlProps & { error: Maybe<string> }) => {
+const CustomControl = ({
+  children,
+  ...props
+}: ControlProps & { error: Maybe<string> }) => {
   const { error, isFocused } = props;
 
   return (
@@ -145,7 +161,8 @@ const CustomControl = ({ children, ...props }: ControlProps & { error: Maybe<str
         tw`border-2 rounded-full px-5 py-3 hover:(border-2 border-primary)`,
         isFocused && tw`border-primary`,
         error && tw`border-error ring-error-light ring-2 hover:(border-error)`,
-        props.isDisabled && tw`bg-white border-1 border-gray hover:(bg-gray) cursor-not-allowed`
+        props.isDisabled &&
+          tw`bg-white border-1 border-gray hover:(bg-gray) cursor-not-allowed`,
       ]}
     >
       {/* <HiSearch  css={[
@@ -171,25 +188,35 @@ interface ISelectProps<T> extends IFieldComponentBaseProps<IOption<T>> {
 export const Select = <T extends Object>(props: ISelectProps<T>) => {
   const { error } = props;
 
-  const CustomControlMemo = useCallback((props: ControlProps) => <CustomControl {...props} error={error} />, [error]);
+  const CustomControlMemo = useCallback(
+    (props: ControlProps) => <CustomControl {...props} error={error} />,
+    [error]
+  );
   const CustomValueContainerMemo = useCallback(
-    (props: ValueContainerProps) => <Components.ValueContainer {...props} tw="p-0 m-0" />,
+    (props: ValueContainerProps) => (
+      <Components.ValueContainer {...props} tw="p-0 m-0" />
+    ),
     []
   );
   const CustomMenuMemo = useCallback(
-    (props: MenuProps) => <Components.Menu {...props} tw="shadow-menu rounded-md z-10" />,
+    (props: MenuProps) => (
+      <Components.Menu {...props} tw="shadow-menu rounded-md z-10" />
+    ),
     []
   );
 
   return (
     <div css={[props.containerCss]}>
-      <FieldLabel isInErrorState={!!props.error} containerCss={[tw`mb-0.5`, props.disabled && tw`text-gray`]}>
+      <FieldLabel
+        isInErrorState={!!props.error}
+        containerCss={[tw`mb-0.5`, props.disabled && tw`text-gray`]}
+      >
         {addAsterisk(props.label, props.required, !!props.error)}
       </FieldLabel>
       <ReactSelect
         classNamePrefix="react-select"
         value={props.value}
-        isClearable
+        isClearable={false}
         isSearchable
         autoFocus={props.autofocus}
         onBlur={props.onBlur}
@@ -232,7 +259,7 @@ export const Select = <T extends Object>(props: ISelectProps<T>) => {
           // @ts-ignore
           MenuList: CustomMenuList,
           // @ts-ignore
-          Menu: CustomMenuMemo
+          Menu: CustomMenuMemo,
           // SelectContainer: (props) => {
           //   return <Components.SelectContainer {...props} />;
           // },

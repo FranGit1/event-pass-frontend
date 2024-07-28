@@ -19,15 +19,9 @@ interface MobileMenuProps {
 export const MobileMenu = ({ onNavigation }: MobileMenuProps) => {
   const { navigateBuyerHome, location, navigateWithSlug, navigate } =
     useNavigation();
-  const isHome = location.pathname === routes.admin.base;
+  const isHome = location.pathname === routes.organizations;
   const isMobile = useMedia("(max-width: 1200px)");
   const { auth } = useAuth();
-  const handleNavigation = (navigationPath: string) => {
-    navigationPath === routes.admin.base
-      ? navigateBuyerHome()
-      : navigateWithSlug(navigationPath);
-    onNavigation();
-  };
 
   const handleNavWithoutSlug = (route: string) => {
     navigate(route);
@@ -46,23 +40,16 @@ export const MobileMenu = ({ onNavigation }: MobileMenuProps) => {
                 lead={Home}
                 leadCss={[tw`h-6 w-6`]}
                 containerCss={[tw`mb-3 `]}
-                onClick={() => handleNavigation("routes.home.base")}
+                onClick={() => navigate(routes.base)}
               >
                 {t("home")}
               </Button.Text>
             )}
-            <Button.Text
-              lead={CiHeart}
-              leadCss={[tw`h-6 w-6`]}
-              containerCss={[tw`mb-3`]}
-              onClick={() => handleNavigation("routes.home.favroites")}
-            >
-              {t("myFavorites")}
-            </Button.Text>
+
             <Button.Text
               lead={CiSettings}
               leadCss={[tw`h-6 w-6`]}
-              onClick={() => handleNavigation("routes.home.settings")}
+              onClick={() => navigate("routes.home.settings")}
             >
               {t("settings")}
             </Button.Text>
@@ -74,7 +61,7 @@ export const MobileMenu = ({ onNavigation }: MobileMenuProps) => {
               lead={ProfileIcon}
               leadCss={[tw`h-6 w-6`]}
               containerCss={[tw`mb-4`, isHome && tw`mb-6`]}
-              onClick={() => handleNavigation("routes.auth.login")}
+              onClick={() => navigate("routes.auth.login")}
             >
               {t("login")}
             </Button.Text>
@@ -84,7 +71,7 @@ export const MobileMenu = ({ onNavigation }: MobileMenuProps) => {
                 lead={Home}
                 leadCss={[tw`h-6 w-6`]}
                 containerCss={[tw`mb-6 `]}
-                onClick={() => handleNavigation("routes.home.base")}
+                onClick={() => navigate("routes.home.base")}
               >
                 {t("allProjects")}
               </Button.Text>
@@ -95,7 +82,7 @@ export const MobileMenu = ({ onNavigation }: MobileMenuProps) => {
         <Typography.Body
           containerCss={[tw`text-primary ml-5 mt-4 underline md:hidden block`]}
         >
-          Scape Consulting d.o.o
+          Event Pass
         </Typography.Body>
       </div>
       <div tw="self-end flex flex-col items-end mr-12">

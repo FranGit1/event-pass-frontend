@@ -1,3 +1,16 @@
 {
-  "translation": {}
+  "translation": {
+    "joinOrganization": "Pridružite se organizaciji",
+    "invitationCode": "Kod za pridruživanje",
+    "generateCode": "Generirajte kod za pridruživanje organizaciji",
+    "successJoin": "Uspješno ste se pridružili novoj organizaciji",
+    "back": "Nazad",
+    "home": "Početna",
+    "myProfile": "Moj profil",
+    "settings": "Postavke",
+    "signOut": "Odjava",
+    "createEvent": "Kreiraj događaj",
+    "liveEvents": "Trenutni događaji",
+    "yourOrganizations": "Vaše organizacije"
+  }
 }

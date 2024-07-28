@@ -30,8 +30,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (auth.token) {
-      console.log("called");
-
       localStorage.setItem("token", auth.token);
     } else {
       localStorage.removeItem("token");

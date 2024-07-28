@@ -18,24 +18,11 @@ import { IoChevronBack } from "react-icons/io5";
 
 export const AuthTabsPage = () => {
   const { t } = useTranslation();
-  const { navigate } = useNavigation();
   const isMobile = useMedia("(max-width: 1200px)");
 
   return (
     <PageContainer containerCss={[tw` h-[calc(100vh-6rem)]`]}>
-      <div tw="hidden mt-6 md:(flex justify-end)">
-        <LanguageSelect />
-      </div>
-      <Button.Text
-        containerCss={[tw` self-start mt-10 hidden md:flex`]}
-        lead={IoChevronBack}
-        onClick={() => {
-          navigate(routes.base);
-        }}
-      >
-        {t("back")}
-      </Button.Text>
-      <div tw="flex flex-col justify-between items-center h-full mb-0 mt-10 md:mt-[-2.5rem]">
+      <div tw="flex flex-col justify-between items-center h-full mb-0 mt-20">
         <div tw="flex-col items-center text-center ">
           {isMobile ? (
             <Typography.H2 containerCss={[tw`mb-4 md:mb-0`]}>

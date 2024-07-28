@@ -125,7 +125,12 @@ export const LoginPage = () => {
           </Typography.Notice>
         </div>
 
-        <div>
+        <div tw="flex flex-col">
+          <ReCAPTCHA
+            sitekey={config.recaptchaSiteKey}
+            ref={reCaptchaRef}
+            tw="mx-auto  mb-8"
+          />
           <div
             css={[tw`flex flex-row justify-center mb-6 cursor-pointer w-full`]}
           >
@@ -134,6 +139,7 @@ export const LoginPage = () => {
               {t("forgotPassword")}
             </Typography.Meta>
           </div>
+
           <div css={[tw`flex flex-row justify-center`]}>
             <Button.Contained
               allowLoader
@@ -144,7 +150,6 @@ export const LoginPage = () => {
             </Button.Contained>
           </div>
         </div>
-        <ReCAPTCHA sitekey={config.recaptchaSiteKey} ref={reCaptchaRef} />
       </form>
     </FormProvider>
   );
