@@ -11,6 +11,24 @@
     "signOut": "Odjava",
     "createEvent": "Kreiraj događaj",
     "liveEvents": "Trenutni događaji",
-    "yourOrganizations": "Vaše organizacije"
+    "yourOrganizations": "Vaše organizacije",
+    "logintoSave": "Prijavite se da biste spremili organizacije u favorite.",
+    "removeFromFavorites": "Uklonjeno iz favorita!",
+    "addedToFavorites": "Spremljeno u favorite!",
+    "favorites": "Favoriti",
+    "noFavoritesTitle": "Trenutno nemate spremljenih favorita.",
+    "noFavorites": "Pregledajte organizacije da biste spremili favorite.",
+    "myFavorites": "Moji favoriti",
+    "forgotPassword": "Zaboravljena lozinka",
+    "logIn": "Prijava",
+    "login": "Prijava",
+    "signUp": "Registracija",
+    "loginMessage": "Započnimo!",
+    "projectFiles": "Thumbnail eventa",
+    "acceptedFiles1": "Prihvaćene vrste datoteka: JPEG, PNG.",
+    "acceptedFilesSub1": "Preporučamo da slike budu veličine do 1 MB.",
+    "thumbDesc": "Ova slika je mali prikaz vašeg projekta na početnoj stranici.",
+    "dragFiles": "Dovuci ili pretraži datoteke",
+    "deleteEvent": "Obriši događaj"
   }
 }

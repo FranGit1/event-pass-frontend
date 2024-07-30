@@ -1,7 +1,7 @@
 import { format, isBefore, parseISO } from "date-fns";
 import React, { FunctionComponent, SVGProps } from "react";
 import tw from "twin.macro";
-import { CreateEventDto, EventResDto, Maybe } from "../types";
+import { CreateEventDto, EventResDto, FetchedEventData, Maybe } from "../types";
 
 export const errorMessageStrings = {
   passwordRequired: "passwordRequiredError",
@@ -49,6 +49,12 @@ export function formatDate(
   const formattedDate = format(date, dateFormat);
 
   return uppercase ? formattedDate.toUpperCase() : formattedDate;
+}
+export function formatDateOld(date: Date, options?: IFormatDateOptions) {
+  const { dateFormat = "dd.MM.yyyy", uppercase = false } = options || {};
+  const startDate = format(date, dateFormat);
+
+  return uppercase ? startDate.toUpperCase() : startDate;
 }
 
 export function getInitialsFromName(name: string) {
@@ -111,10 +117,11 @@ export const transformEvent = (event: any): CreateEventDto => {
       ...event.location,
       latitude: event.location.latitude.toString(),
       longitude: event.location.longitude.toString(),
+      id: event.location?.id,
     },
     sliderPosition: event.sliderPosition,
     displayInSlider: event.displayInSlider,
-    featuredImage: event.featuredImage,
+    featuredImage: event.featuredImage[0].fileUrl,
     keywords: event.keywords,
     endDate: event.endDate,
     startDate: event.startDate,
@@ -135,4 +142,31 @@ export const separateEvents = (events: EventResDto[]) => {
   );
 
   return { pastEvents, upcomingEvents };
+};
+
+export const formatFetchedEventData = (eventData: FetchedEventData) => {
+  return {
+    ...eventData,
+    startDate: parseISO(eventData?.startDate),
+    endDate: parseISO(eventData?.endDate),
+    topic: {
+      label: eventData?.topic.name,
+      value: eventData?.topic.id,
+    },
+  };
+};
+
+export const getMimeType = (fileName: string) => {
+  //@ts-ignore
+  const extension = fileName.split(".").pop().toLowerCase().substring(0, 3);
+
+  switch (extension) {
+    case "jpg":
+    case "jpeg":
+      return "image/jpeg";
+    case "png":
+      return "image/png";
+    default:
+      return "application/octet-stream";
+  }
 };

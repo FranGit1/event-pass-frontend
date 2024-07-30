@@ -96,6 +96,7 @@ export type Organization = {
 };
 
 type EventLocation = {
+  id?: number;
   city: string;
   country: string;
   name: string;
@@ -106,21 +107,9 @@ export type OrganizationsForSearch = {
   title: string;
   id: number;
 };
-
-export type EventResDto = {
+export type EventTopic = {
+  name: string;
   id: number;
-  organizer: string;
-  title: string;
-  description: string;
-  location: EventLocation;
-  price: number;
-  topic: string;
-  startDate: string;
-  endDate: string;
-  keywords: string;
-  featuredImage: string;
-  displayInSlider: boolean;
-  sliderPosition: number;
 };
 
 export type CreateEventDto = {
@@ -143,3 +132,34 @@ export interface User {
   token?: string;
   id?: number;
 }
+
+export interface FetchedEventData {
+  id: number;
+  title: string;
+  description: string;
+  location: EventLocation;
+  price: string;
+  startDate: string;
+  topic: EventTopic;
+  endDate: string;
+  keywords: string;
+  featuredImage: string;
+  displayInSlider: boolean;
+  sliderPosition: number;
+}
+
+export type EventResDto = {
+  id: number;
+  organizer: string;
+  title: string;
+  description: string;
+  location: EventLocation;
+  price: number;
+  topic: string;
+  startDate: string;
+  endDate: string;
+  keywords: string;
+  featuredImage: string;
+  displayInSlider: boolean;
+  sliderPosition: number;
+};

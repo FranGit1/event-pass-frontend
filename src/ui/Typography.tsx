@@ -1,14 +1,18 @@
-import { HTMLAttributeAnchorTarget, MouseEventHandler, PropsWithChildren } from 'react';
-import tw from 'twin.macro';
-import { IComponentBaseProps } from '../types';
+import {
+  HTMLAttributeAnchorTarget,
+  MouseEventHandler,
+  PropsWithChildren,
+} from "react";
+import tw from "twin.macro";
+import { IComponentBaseProps } from "../types";
 
 interface IBaseTypographyProps extends IComponentBaseProps {
-  element?: 'h1' | 'h2' | 'h3' | 'span' | 'p' | 'label';
+  element?: "h1" | "h2" | "h3" | "span" | "p" | "label";
   onClick?: MouseEventHandler<any>;
 }
 
 const BaseTypography = (props: PropsWithChildren<IBaseTypographyProps>) => {
-  const Component = props.element ?? 'span';
+  const Component = props.element ?? "span";
   return (
     <Component
       // STATEMENT: display: block style is used on span and label tags.
@@ -39,8 +43,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-h1 font-medium -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'h1'}
+        containerCss={[
+          tw`text-h1 font-medium -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "h1"}
       >
         {props.children}
       </BaseTypography>
@@ -50,8 +57,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-h2 font-medium -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'h2'}
+        containerCss={[
+          tw`text-h2 font-medium -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "h2"}
       >
         {props.children}
       </BaseTypography>
@@ -61,8 +71,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-h3 font-medium -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'h3'}
+        containerCss={[
+          tw`text-h3 font-medium -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "h3"}
       >
         {props.children}
       </BaseTypography>
@@ -72,8 +85,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-subtitle font-normal -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'span'}
+        containerCss={[
+          tw`text-subtitle font-normal -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "span"}
       >
         {props.children}
       </BaseTypography>
@@ -83,19 +99,26 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-sm font-normal -tracking-0.03 text-gray`, props.containerCss]}
-        element={props.element ?? 'p'}
+        containerCss={[
+          tw`text-sm font-normal -tracking-0.03 text-gray`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "p"}
       >
         {props.children}
       </BaseTypography>
     );
   },
+
   Meta: (props: PropsWithChildren<ITypographyProps>) => {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-meta text-primary font-normal -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'span'}
+        containerCss={[
+          tw`text-meta text-primary font-normal -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "span"}
       >
         {props.children}
       </BaseTypography>
@@ -105,8 +128,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-body font-normal -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'p'}
+        containerCss={[
+          tw`text-body font-normal -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "p"}
       >
         {props.children}
       </BaseTypography>
@@ -116,8 +142,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-body font-normal -tracking-0.03 text-gray`, props.containerCss]}
-        element={props.element ?? 'p'}
+        containerCss={[
+          tw`text-body font-normal -tracking-0.03 text-gray`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "p"}
       >
         {props.children}
       </BaseTypography>
@@ -128,8 +157,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-button -tracking-0.015 font-medium`, props.containerCss]}
-        element={props.element ?? 'span'}
+        containerCss={[
+          tw`text-button -tracking-0.015 font-medium`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "span"}
       >
         {props.children}
       </BaseTypography>
@@ -139,8 +171,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-button text-primary font-medium -tracking-0.015`, props.containerCss]}
-        element={props.element ?? 'span'}
+        containerCss={[
+          tw`text-button text-primary font-medium -tracking-0.015`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "span"}
       >
         {props.children}
       </BaseTypography>
@@ -150,9 +185,12 @@ export const Typography = {
     return (
       <a
         href={props.href}
-        css={[tw`text-link text-primary font-semibold -tracking-0.015 underline cursor-pointer`, props.containerCss]}
+        css={[
+          tw`text-link text-primary font-semibold -tracking-0.015 underline cursor-pointer`,
+          props.containerCss,
+        ]}
         tabIndex={0}
-        role={!props.href ? 'button' : undefined}
+        role={!props.href ? "button" : undefined}
         target={props.target}
         onClick={props.onClick}
       >
@@ -164,8 +202,11 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-body font-400 -tracking-0.03 text-black`, props.containerCss]}
-        element={props.element ?? 'p'}
+        containerCss={[
+          tw`text-body font-400 -tracking-0.03 text-black`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "p"}
       >
         {props.children}
       </BaseTypography>
@@ -175,11 +216,14 @@ export const Typography = {
     return (
       <BaseTypography
         {...props}
-        containerCss={[tw`text-subtitle font-normal -tracking-0.03`, props.containerCss]}
-        element={props.element ?? 'span'}
+        containerCss={[
+          tw`text-subtitle font-normal -tracking-0.03`,
+          props.containerCss,
+        ]}
+        element={props.element ?? "span"}
       >
         {props.children}
       </BaseTypography>
     );
-  }
+  },
 };

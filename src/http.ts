@@ -3,6 +3,7 @@ import { config } from "./config";
 import {
   CreateEventDto,
   EventResDto,
+  FetchedEventData,
   LoginForm,
   Organization,
   OrganizationsForSearch,
@@ -113,6 +114,25 @@ class HTTP {
       throw error;
     }
   };
+  updateEvent = async (eventData: CreateEventDto, eventId: number) => {
+    try {
+      const response = await axiosAuthenticated.put(
+        `events/${eventId}`,
+        eventData
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+  deleteEvent = async (eventId: number) => {
+    try {
+      const response = await axiosAuthenticated.delete(`events/${eventId}`);
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
 
   joinOrganizationViaCode = async (organizationCode: string) => {
     try {
@@ -136,12 +156,64 @@ class HTTP {
     }
   };
 
+  removeOrganizationFavorite = async (organizationId: number) => {
+    try {
+      const response = await axiosAuthenticated.delete(
+        `organizations/favourite/${organizationId}`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
   leaveOrganization = async (organizationId: number) => {
     try {
       const response = await axiosAuthenticated.post(
         `organizations/leave-organization/${organizationId}`
       );
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getOrganizersFavorites = async () => {
+    try {
+      const response = await axiosAuthenticated.get(
+        `organizations/favorites/get-favorites-for-organizer`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  addOrganizationToFavorite = async (organizationData: { id: number }) => {
+    try {
+      const response = await axiosAuthenticated.post(
+        `organizations/favourite`,
+        organizationData
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getOrganizerFavoritesIds = async () => {
+    try {
+      const response = await axiosAuthenticated.get(
+        `organizations/favourite/ids`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+  getEventByEventId = async (eventId: number): Promise<FetchedEventData> => {
+    try {
+      const response = await axiosAuthenticated.get(`events/${eventId}`);
+      return response.data.payload;
     } catch (error) {
       throw error;
     }

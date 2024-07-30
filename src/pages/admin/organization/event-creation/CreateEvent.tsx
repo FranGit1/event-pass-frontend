@@ -10,32 +10,58 @@ import { Form } from "../../../../fields/form";
 import tw from "twin.macro";
 import { GeoapifyGeocoderAutocomplete } from "@geoapify/react-geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
-import { useState } from "react";
 import { Button } from "../../../../ui/buttons/Button";
-import { addAsterisk, transformEvent } from "../../../../utils";
+import {
+  addAsterisk,
+  formatFetchedEventData,
+  transformEvent,
+} from "../../../../utils";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "../../../../http";
-import { CreateEventDto } from "../../../../types";
+import { CreateEventDto, FetchedEventData } from "../../../../types";
 import { useParams } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import { routes } from "../../../../navigation/admin/routing";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { adminSelectedEventIdAtom } from "../../../../recoil/atoms/adminSelectedEventIdAtom";
+import { useGetEventByEventId } from "../../../../queries";
+import { toast } from "../../../../ui/indicators/Toast";
 
 export const CreateEventData = () => {
-  const data = {};
-  return <CreateEventForm data={data} />;
+  const eventIdValue = useRecoilValue(adminSelectedEventIdAtom);
+
+  const { data, isFetched } = useGetEventByEventId(eventIdValue || 0);
+  return (
+    isFetched && <CreateEventForm data={data} eventIdValue={eventIdValue} />
+  );
 };
 
 interface ICreateEventFormProps {
-  data: any;
+  data: FetchedEventData | undefined;
+  eventIdValue: number | undefined;
 }
 
 export const CreateEventForm = (props: ICreateEventFormProps) => {
   const { t } = useTranslation();
   const { navigate } = useNavigation();
   const { organizationId } = useParams();
+  const formatedData = props.data ? formatFetchedEventData(props.data) : [];
   const createNewEventMutation = useMutation({
     mutationFn: (eventData: CreateEventDto) =>
       http.createNewEvent(eventData, Number(organizationId)),
+    onSuccess: () => {
+      toast.success("Successfully created event");
+      navigate(routes.base);
+    },
+  });
+
+  const updateEventMutation = useMutation({
+    mutationFn: (data: { eventData: CreateEventDto; eventId: number }) =>
+      http.updateEvent(data.eventData, data.eventId),
+    onSuccess: () => {},
+  });
+  const deleteEventMutation = useMutation({
+    mutationFn: (eventId: number) => http.deleteEvent(eventId),
     onSuccess: () => {},
   });
 
@@ -44,17 +70,24 @@ export const CreateEventForm = (props: ICreateEventFormProps) => {
   const createEventDataForm = useForm<CreateEventFormInferred>({
     resolver: yupResolver(CreateEventSchema),
     defaultValues: {
+      //@ts-ignore
       eventData: {
-        ...props.data,
+        ...formatedData,
       },
     },
   });
 
   const onSubmit = createEventDataForm.handleSubmit(async (values) => {
-    console.log(values);
-
     const eventData = transformEvent(values.eventData);
-    createNewEventMutation.mutateAsync(eventData);
+
+    if (props.eventIdValue && values.eventData.id) {
+      updateEventMutation.mutateAsync({
+        eventData,
+        eventId: values.eventData.id,
+      });
+    } else {
+      createNewEventMutation.mutateAsync(eventData);
+    }
   });
 
   const onPlaceSelect = (value: any) => {
@@ -77,20 +110,33 @@ export const CreateEventForm = (props: ICreateEventFormProps) => {
             containerCss={[tw` self-start min-w-0 pl-0 md:flex`]}
             lead={IoChevronBack}
             onClick={() => {
-              navigate(routes.base);
+              navigate(-1);
             }}
           >
             {t("back")}
           </Button.Text>
+          <div tw="self-end flex flex-row gap-x-4">
+            <Button.Contained
+              containerCss={[tw``]}
+              onClick={() => {
+                onSubmit();
+              }}
+            >
+              {props.eventIdValue ? `Update Event` : `Create Event`}
+            </Button.Contained>
 
-          <Button.Contained
-            containerCss={[tw`self-end`]}
-            onClick={() => {
-              onSubmit();
-            }}
-          >
-            Create Event
-          </Button.Contained>
+            {props.eventIdValue && (
+              <Button.Contained
+                containerCss={[tw``]}
+                onClick={() => {
+                  if (props.eventIdValue)
+                    deleteEventMutation.mutateAsync(props.eventIdValue);
+                }}
+              >
+                {t("deleteEvent")}
+              </Button.Contained>
+            )}
+          </div>
         </div>
         <div tw="flex flex-col gap-y-6 mt-8">
           <Form.TextInput.Rounded
@@ -133,12 +179,15 @@ export const CreateEventForm = (props: ICreateEventFormProps) => {
             placeholder="Enter keywords for event"
             containerCss={[tw`w-1/3`]}
           />
-          <Form.TextInput.Rounded
+          <Form.Files
             name="eventData.featuredImage"
-            label="Featured image"
-            required={true}
-            placeholder="Enter a link for featured image"
+            label={t("projectFiles")}
+            multiple={false}
+            uploadMessage={t("acceptedFiles1")}
+            uploadMessageSub={t("acceptedFilesSub1")}
+            helperText={t("thumbDesc")}
             containerCss={[tw`w-1/3`]}
+            imageUrl={props.data?.featuredImage}
           />
           <Form.Checkbox
             name={"eventData.displayInSlider"}

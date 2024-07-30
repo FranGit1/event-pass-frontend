@@ -16,8 +16,6 @@ export const SidebarNavigation = ({
 
   // Helper function to determine if a sidebar item's URL matches the current path
   const isRouteSelected = (itemUrl: string, currentPath: string) => {
-    console.log(itemUrl, currentPath);
-
     return matchPath({ path: itemUrl, end: false }, currentPath) !== null;
   };
 

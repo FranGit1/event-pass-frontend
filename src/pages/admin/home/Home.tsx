@@ -9,12 +9,12 @@ import { Typography } from "../../../ui/Typography";
 import { FaPlus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { routes } from "../../../navigation/admin/routing";
+import { Link } from "react-router-dom";
 
 export const AdminHome = () => {
   const { navigate } = useNavigation();
   const { t } = useTranslation();
   const { data } = useGetComplexBuildingsAndUnitTypes();
-  console.log(data);
 
   return (
     <PageContainer containerCss={[tw`px-20`]}>

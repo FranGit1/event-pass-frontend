@@ -5,6 +5,8 @@ import {
 } from "@tanstack/react-query";
 import hash from "object-hash";
 import { http } from "./http";
+import { useSetRecoilState } from "recoil";
+import { adminSelectedEventIdAtom } from "./recoil/atoms/adminSelectedEventIdAtom";
 
 export const queryKeys = {
   users: "users",
@@ -12,6 +14,9 @@ export const queryKeys = {
   organizationsByOrganizer: "organizationsByOrganizer",
   eventsByOrganization: "eventsByOrganization",
   allOrganizations: "allOrganizations",
+  organizerFavoritesIds: "organizerFavoritesIds",
+  organizerFavorites: "organizerFavorites",
+  eventByEventId: "eventByEventId",
 };
 
 export const useIsAuthenticated = () => {
@@ -48,6 +53,37 @@ export const useGetAllOrganizations = () => {
     staleTime: 0,
   });
 };
+export function useGetFavoritesForOrganizerIdsOnly() {
+  return useQuery({
+    queryKey: [queryKeys.organizerFavoritesIds],
+    queryFn: async () => {
+      return http.getOrganizerFavoritesIds();
+    },
+    staleTime: 0,
+  });
+}
+
+export function useGetEventByEventId(eventId: number) {
+  return useQuery({
+    queryKey: [queryKeys.eventByEventId, eventId],
+    queryFn: async () => {
+      const response = await http.getEventByEventId(eventId);
+      return response;
+    },
+
+    staleTime: 0,
+  });
+}
+
+export function useGetFavoritesForOrganizer() {
+  return useQuery({
+    queryKey: [queryKeys.organizerFavorites],
+    queryFn: async () => {
+      return http.getOrganizersFavorites();
+    },
+    staleTime: 0,
+  });
+}
 
 const useLazyQuery = <T>(
   queryKey: any,

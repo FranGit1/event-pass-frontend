@@ -5,6 +5,7 @@ import { parseRTEValue } from "../../fields/controlled/RichTextEditor";
 
 const createEventSchemaObject = yup.object().shape({
   eventData: yup.object().shape({
+    id: yup.number().nullable(),
     title: yup.string().required(),
     description: yup
       .string()
@@ -25,10 +26,11 @@ const createEventSchemaObject = yup.object().shape({
     startDate: yup.date().required(),
     endDate: yup.date().required(),
     keywords: yup.string().required(),
-    featuredImage: yup.string().required(),
+    featuredImage: yup.array(yup.mixed().required()).min(1).max(1),
     displayInSlider: yup.boolean().required(),
     sliderPosition: yup.number().required(),
     location: yup.object().shape({
+      id: yup.number().nullable(),
       city: yup.string().required(),
       country: yup.string().required(),
       name: yup.string().required(),

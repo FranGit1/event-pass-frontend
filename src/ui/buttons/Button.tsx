@@ -1,20 +1,34 @@
-import { IComponentBaseProps, Maybe, ReactComponent, TwinStyle, VariantProps } from '../../types';
-import React, { MouseEventHandler, MutableRefObject, PropsWithChildren, useState } from 'react';
+import {
+  IComponentBaseProps,
+  Maybe,
+  ReactComponent,
+  TwinStyle,
+  VariantProps,
+} from "../../types";
+import React, {
+  MouseEventHandler,
+  MutableRefObject,
+  PropsWithChildren,
+  useState,
+} from "react";
 
-import tw from 'twin.macro';
-import { Typography } from '../Typography';
+import tw from "twin.macro";
+import { Typography } from "../Typography";
 
 type IButtonLoaderProps = IComponentBaseProps;
 const ButtonLoader = (props: IButtonLoaderProps) => {
   return (
     <div
-      css={[tw`w-5.5 h-5.5 border-2 border-t-transparent border-solid rounded-full animate-spin`, props.containerCss]}
+      css={[
+        tw`w-5.5 h-5.5 border-2 border-t-transparent border-solid rounded-full animate-spin`,
+        props.containerCss,
+      ]}
     />
   );
 };
 
 interface IBaseButtonProps extends IComponentBaseProps {
-  type?: 'button' | 'submit' | 'reset' | undefined;
+  type?: "button" | "submit" | "reset" | undefined;
   allowLoader?: boolean;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -61,7 +75,7 @@ const BaseButton: React.FC<PropsWithChildren<IBaseButtonProps>> = (props) => {
 
   return (
     <button
-      type={props.type ?? 'button'}
+      type={props.type ?? "button"}
       disabled={props.disabled ?? false}
       css={[
         // STATEMENT: Buttons have transparent border.
@@ -76,7 +90,7 @@ const BaseButton: React.FC<PropsWithChildren<IBaseButtonProps>> = (props) => {
         // If necessary, please change it to your liking.
         tw`flex flex-row items-center justify-center py-2 px-4 min-w-28`,
         props.disabled && tw`cursor-not-allowed`,
-        props.containerCss
+        props.containerCss,
       ]}
       onClick={onClick}
     >
@@ -91,7 +105,9 @@ const BaseButton: React.FC<PropsWithChildren<IBaseButtonProps>> = (props) => {
           */}
           {Lead && <Lead css={leadCss} containerCss={leadCss} />}
           {LeadSvg && <LeadSvg tw="text-white mr-3" css={leadCss} />}
-          <Typography.ButtonPrimary containerCss={[props.textCss]}>{props.children}</Typography.ButtonPrimary>
+          <Typography.ButtonPrimary containerCss={[props.textCss]}>
+            {props.children}
+          </Typography.ButtonPrimary>
           {Trail && <Trail css={trailCss} containerCss={trailCss} />}
         </div>
       )}
@@ -103,18 +119,28 @@ export type IButtonProps = IBaseButtonProps & VariantProps;
 
 export const Button = {
   Contained: (props: PropsWithChildren<IButtonProps>) => {
-    const isPrimary = !(props.variant === 'secondary');
+    const isPrimary = !(props.variant === "secondary");
     return (
       <BaseButton
         {...props}
         loaderCss={[tw`border-white border-t-transparent`, props.loaderCss]}
-        leadCss={[isPrimary ? tw`text-white` : tw`text-primary`, props.disabled && tw`text-white`, props.leadCss]}
-        trailCss={[isPrimary ? tw`text-white` : tw`text-primary`, props.disabled && tw`text-white`, props.trailCss]}
+        leadCss={[
+          isPrimary ? tw`text-white` : tw`text-primary`,
+          props.disabled && tw`text-white`,
+          props.leadCss,
+        ]}
+        trailCss={[
+          isPrimary ? tw`text-white` : tw`text-primary`,
+          props.disabled && tw`text-white`,
+          props.trailCss,
+        ]}
         textCss={[
-          isPrimary ? tw`text-white` : tw`text-primary hover:(text-primary-100)`,
+          isPrimary
+            ? tw`text-white`
+            : tw`text-primary hover:(text-primary-100)`,
 
           props.disabled && tw`text-white`,
-          props.textCss
+          props.textCss,
         ]}
         containerCss={[
           isPrimary ? tw`bg-primary rounded-3xl` : tw`bg-primary-200`,
@@ -125,32 +151,37 @@ export const Button = {
             ? tw`focus-visible:(bg-primary-100 border-primary border-2 ring-2 ring-primary-400 outline-none)`
             : tw`focus-visible:(bg-secondary border-secondary border-2 ring-2 ring-secondary-200 outline-none)`,
           isPrimary ? tw`disabled:(opacity-60)` : tw`disabled:(opacity-60)`,
-          props.containerCss
+          props.containerCss,
         ]}
       />
     );
   },
   Fab: (props: PropsWithChildren<IButtonProps>) => {
-    const isPrimary = !(props.variant === 'secondary');
+    const isPrimary = !(props.variant === "secondary");
     return (
       <BaseButton
         {...props}
-        loaderCss={[tw`border-white border-t-transparent w-fit  m-0 p-0`, props.loaderCss]}
+        loaderCss={[
+          tw`border-white border-t-transparent w-fit  m-0 p-0`,
+          props.loaderCss,
+        ]}
         leadCss={[
           isPrimary ? tw`text-white  m-0 p-0` : tw`text-primary`,
           props.disabled && tw`text-white`,
-          props.leadCss
+          props.leadCss,
         ]}
         trailCss={[
           isPrimary ? tw`text-white  m-0 p-0` : tw`text-primary`,
           props.disabled && tw`text-white`,
-          props.trailCss
+          props.trailCss,
         ]}
         textCss={[
-          isPrimary ? tw`text-white m-0 p-0` : tw`text-primary hover:(text-primary-100)`,
+          isPrimary
+            ? tw`text-white m-0 p-0`
+            : tw`text-primary hover:(text-primary-100)`,
 
           props.disabled && tw`text-white`,
-          props.textCss
+          props.textCss,
         ]}
         containerCss={[
           isPrimary ? tw`bg-white rounded-full p-0 m-0 ` : tw`bg-primary-200`,
@@ -158,26 +189,44 @@ export const Button = {
           isPrimary
             ? tw`focus-visible:(bg-primary-100 border-primary border-2 ring-2 ring-primary-400 outline-none)`
             : tw`focus-visible:(bg-secondary border-secondary border-2 ring-2 ring-secondary-200 outline-none)`,
-          isPrimary ? tw`disabled:(bg-gray-disabled)` : tw`disabled:(bg-gray-disabled)`,
-          props.containerCss
+          isPrimary
+            ? tw`disabled:(bg-gray-disabled)`
+            : tw`disabled:(bg-gray-disabled)`,
+          props.containerCss,
         ]}
       />
     );
   },
   Outlined: (props: PropsWithChildren<IButtonProps>) => {
-    const isPrimary = !(props.variant === 'secondary');
+    const isPrimary = !(props.variant === "secondary");
     return (
       <BaseButton
         {...props}
         loaderCss={[
-          isPrimary ? tw`border-primary border-t-transparent` : tw`border-secondary border-t-transparent`,
-          props.loaderCss
+          isPrimary
+            ? tw`border-primary border-t-transparent`
+            : tw`border-secondary border-t-transparent`,
+          props.loaderCss,
         ]}
-        leadCss={[isPrimary ? tw`text-primary` : tw`text-secondary`, props.disabled && tw`text-gray`, props.leadCss]}
-        trailCss={[isPrimary ? tw`text-primary` : tw`text-secondary`, props.disabled && tw`text-gray`, props.leadCss]}
-        textCss={[isPrimary ? tw`text-primary` : tw`text-secondary`, props.disabled && tw`text-gray`, props.textCss]}
+        leadCss={[
+          isPrimary ? tw`text-primary` : tw`text-secondary`,
+          props.disabled && tw`text-gray`,
+          props.leadCss,
+        ]}
+        trailCss={[
+          isPrimary ? tw`text-primary` : tw`text-secondary`,
+          props.disabled && tw`text-gray`,
+          props.leadCss,
+        ]}
+        textCss={[
+          isPrimary ? tw`text-primary` : tw`text-secondary`,
+          props.disabled && tw`text-gray`,
+          props.textCss,
+        ]}
         containerCss={[
-          isPrimary ? tw`bg-white border-primary` : tw`bg-white border-secondary`,
+          isPrimary
+            ? tw`bg-white border-primary rounded-3xl`
+            : tw`bg-white border-secondary`,
           isPrimary
             ? tw`hover:(bg-transparent border-primary-100 border-2)`
             : tw`hover:(bg-secondary-300 border-secondary border-2)`,
@@ -187,43 +236,53 @@ export const Button = {
           isPrimary
             ? tw`disabled:(bg-transparent border-gray border-2)`
             : tw`disabled:(bg-transparent border-gray border-2)`,
-          props.containerCss
+          props.containerCss,
         ]}
       />
     );
   },
   Text: (props: PropsWithChildren<IButtonProps>) => {
-    const isPrimary = !(props.variant === 'secondary');
+    const isPrimary = !(props.variant === "secondary");
     return (
       <BaseButton
         {...props}
         loaderCss={[
-          isPrimary ? tw`border-primary-100 border-t-transparent` : tw`border-secondary border-t-transparent`,
-          props.loaderCss
+          isPrimary
+            ? tw`border-primary-100 border-t-transparent`
+            : tw`border-secondary border-t-transparent`,
+          props.loaderCss,
         ]}
         leadCss={[
-          isPrimary ? tw`text-primary group-hover:(text-gray)` : tw`text-secondary`,
+          isPrimary
+            ? tw`text-primary group-hover:(text-gray)`
+            : tw`text-secondary`,
           props.disabled && tw`text-gray-200`,
-          props.leadCss
+          props.leadCss,
         ]}
         trailCss={[
-          isPrimary ? tw`text-primary group-hover:(text-gray)` : tw`text-secondary`,
+          isPrimary
+            ? tw`text-primary group-hover:(text-gray)`
+            : tw`text-secondary`,
           props.disabled && tw`text-gray-200`,
-          props.leadCss
+          props.leadCss,
         ]}
         textCss={[
-          isPrimary ? tw`text-primary group-hover:(text-gray)` : tw`text-secondary`,
+          isPrimary
+            ? tw`text-primary group-hover:(text-gray)`
+            : tw`text-secondary`,
           props.disabled && tw`text-gray-200`,
-          props.textCss
+          props.textCss,
         ]}
         containerCss={[
-          isPrimary ? tw`hover:(disabled:(bg-transparent))` : tw`hover:(bg-secondary-300 disabled:(bg-transparent))`,
+          isPrimary
+            ? tw`hover:(disabled:(bg-transparent))`
+            : tw`hover:(bg-secondary-300 disabled:(bg-transparent))`,
           isPrimary
             ? tw`focus-visible:(bg-white border-primary-400 border-2 ring-0 outline-none)`
             : tw`focus-visible:(bg-white border-secondary-100 border-2 ring-0 outline-none)`,
-          props.containerCss
+          props.containerCss,
         ]}
       />
     );
-  }
+  },
 };

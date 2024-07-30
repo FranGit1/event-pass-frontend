@@ -17,7 +17,7 @@ import { HiCalendar } from "react-icons/hi";
 import { IFieldComponentBaseProps } from "../../../types";
 import { OutsideClick } from "../../../components/OutsideClick";
 import { TextInput } from "../TextInput";
-import { formatDate } from "../../../utils";
+import { formatDate, formatDateOld } from "../../../utils";
 import tw from "twin.macro";
 import { useBoolean } from "../../../hooks/use-boolean";
 
@@ -59,7 +59,7 @@ export const DatePicker = (props: IDatePickerProps) => {
           disabled={props.disabled}
           tabIndex={undefined}
           readOnly
-          value={props.value != null ? formatDate(props.value) : ""}
+          value={props.value != null ? formatDateOld(props.value) : ""}
           placeholder={props.placeholder}
           error={props.error}
           trail={() =>

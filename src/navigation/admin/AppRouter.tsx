@@ -11,6 +11,7 @@ import { OrganizationBaseLayout } from "../../pages/admin/organization/Organizat
 import RequiredAuth from "../../components/RequireAuth";
 import { JoinOrganization } from "../../pages/admin/organization/join-organization/JoinOrganization";
 import { FetchGenerateCodeOrganizations } from "../../pages/admin/organization/join-organization/GenerateCode";
+import { Favorites } from "../../pages/admin/favorites/Favorites";
 
 export const AppRouter = () => {
   return (
@@ -36,6 +37,10 @@ export const AppRouter = () => {
             <Route
               path={routes.organization.generateJoinCode}
               element={<FetchGenerateCodeOrganizations />}
+            />
+            <Route
+              path={routes.organization.favorites}
+              element={<Favorites />}
             />
           </Route>
 

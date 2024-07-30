@@ -1,5 +1,6 @@
 export const routes = {
-  admin: {
-    base: "/admin",
+  base: "/buyer",
+  landing: {
+    base: "home",
   },
 };

@@ -4,9 +4,17 @@ import { routes } from "../navigation/admin/routing";
 import { Organization } from "../types";
 import { Button } from "../ui/buttons/Button";
 import { Typography } from "../ui/Typography";
-import { MdFavoriteBorder } from "react-icons/md";
 import tw from "twin.macro";
-
+import { useMutation } from "@tanstack/react-query";
+import { http } from "../http";
+import { useEffect, useState } from "react";
+import useAuth from "../hooks/auth/useAuth";
+import { useGetFavoritesForOrganizerIdsOnly } from "../queries";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
+import { toast } from "../ui/indicators/Toast";
+import { useSetRecoilState } from "recoil";
+import { adminSelectedEventIdAtom } from "../recoil/atoms/adminSelectedEventIdAtom";
 interface IOrganizationCardProps {
   organization: Organization;
 }
@@ -14,6 +22,38 @@ interface IOrganizationCardProps {
 export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
   const { navigate } = useNavigation();
   const { t } = useTranslation();
+  const [alreadyInFavorites, setAlreadyInFavorites] = useState<boolean>(false);
+  const { data, refetch } = useGetFavoritesForOrganizerIdsOnly();
+  const { auth } = useAuth();
+  const setEventIdValue = useSetRecoilState(adminSelectedEventIdAtom);
+
+  useEffect(() => {
+    if (data) {
+      for (const favorite of data) {
+        if (favorite.id === organization.id) {
+          setAlreadyInFavorites(true);
+          break;
+        }
+      }
+    }
+  }, [data, organization.id]);
+
+  const addToFavorites = useMutation({
+    mutationFn: () => http.addOrganizationToFavorite({ id: organization.id }),
+    onSuccess: () => {
+      setAlreadyInFavorites(true);
+      refetch();
+    },
+  });
+
+  const removeFromFavorites = useMutation({
+    mutationFn: () => http.removeOrganizationFavorite(Number(organization.id)),
+    onSuccess: () => {
+      setAlreadyInFavorites(false);
+      refetch();
+    },
+  });
+
   return (
     <div tw="w-100 rounded-3xl border-1 border-gray-400 ">
       <div
@@ -42,7 +82,29 @@ export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
           <Typography.H3>{organization.organizer}</Typography.H3>
         </div>
         <div>
-          <MdFavoriteBorder tw="h-6 w-6" />
+          <Button.Text
+            leadCss={[tw`w-6 h-6 text-primary`]}
+            containerCss={[tw`min-w-0 pr-0`]}
+            lead={alreadyInFavorites ? IoMdHeart : IoMdHeartEmpty}
+            onClick={async (e) => {
+              e.stopPropagation();
+              if (!auth.token) {
+                toast.error(t("logintoSave"));
+                return;
+              }
+
+              if (alreadyInFavorites) {
+                setAlreadyInFavorites(false);
+                toast.info(t("removeFromFavorites"));
+
+                await removeFromFavorites.mutateAsync();
+              } else {
+                setAlreadyInFavorites(true);
+                toast.success(t("addedToFavorites"));
+                await addToFavorites.mutateAsync();
+              }
+            }}
+          ></Button.Text>{" "}
         </div>
       </div>
       <div tw="flex flex-row items-center justify-between p-4">
@@ -50,9 +112,10 @@ export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
           {organization.liveEventsCount} {t("liveEvents")}
         </Typography.FooterText>
         <Button.Contained
-          onClick={() =>
-            navigate(`/admin/${routes.eventCreation.base}/${organization.id}`)
-          }
+          onClick={() => {
+            setEventIdValue(undefined);
+            navigate(`/admin/${routes.eventCreation.base}/${organization.id}`);
+          }}
         >
           {t("createEvent")}{" "}
         </Button.Contained>

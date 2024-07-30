@@ -49,9 +49,22 @@ export const MobileMenu = ({ onNavigation }: MobileMenuProps) => {
             <Button.Text
               lead={CiSettings}
               leadCss={[tw`h-6 w-6`]}
+              containerCss={[tw`mb-3 `]}
               onClick={() => navigate("routes.home.settings")}
             >
               {t("settings")}
+            </Button.Text>
+
+            <Button.Text
+              lead={CiHeart}
+              leadCss={[tw`h-6 w-6`]}
+              onClick={() =>
+                navigate(
+                  `/${routes.base}/${routes.organization.base}/${routes.organization.favorites}`
+                )
+              }
+            >
+              {t("favorites")}
             </Button.Text>
           </div>
         ) : (

@@ -12,6 +12,7 @@ export const routes = {
     organizationEvents: ":organizationId/events",
     joinOrganization: "join-organization",
     generateJoinCode: "join-code-generation",
+    favorites: "favorites",
   },
 
   // organization: "organization/:",

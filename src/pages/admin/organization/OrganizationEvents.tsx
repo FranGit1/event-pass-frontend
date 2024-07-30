@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetOrganizationEvents } from "../../../queries";
 import { PageContainer } from "../../../components/layout/PageContainer";
 import { EventResDto, Organization } from "../../../types";
@@ -14,6 +14,8 @@ import { useNavigation } from "../../../hooks/use-navigation";
 import { routes } from "../../../navigation/admin/routing";
 import { IoChevronBack } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
+import { useSetRecoilState } from "recoil";
+import { adminSelectedEventIdAtom } from "../../../recoil/atoms/adminSelectedEventIdAtom";
 
 export const OrganizationEvents = () => {
   const { organizationId } = useParams();
@@ -25,7 +27,7 @@ export const OrganizationEvents = () => {
   const organization: Organization | undefined = data?.organization;
   const events: EventResDto[] = data?.events || [];
   const { pastEvents, upcomingEvents } = separateEvents(events);
-
+  const setEventIdValue = useSetRecoilState(adminSelectedEventIdAtom);
   const leaveOrganizationMutation = useMutation({
     mutationFn: () => http.leaveOrganization(Number(organizationId)),
     onSuccess: (response) => {
@@ -34,7 +36,7 @@ export const OrganizationEvents = () => {
   });
 
   return isFetched ? (
-    <PageContainer containerCss={[tw`w-1/2 ml-0 mt-14 pl-0!`]}>
+    <PageContainer containerCss={[tw`w-full ml-0 mt-14 pl-0!`]}>
       <Button.Text
         containerCss={[tw` self-start mt-10 pb-4 hidden min-w-0 pl-16 md:flex`]}
         lead={IoChevronBack}
@@ -72,14 +74,34 @@ export const OrganizationEvents = () => {
         <Tabs.Item text="Live Events" hideBorderBottom={true}>
           <div tw=" flex flex-row flex-wrap">
             {upcomingEvents?.map((event: EventResDto) => {
-              return <EventCard event={event} />;
+              return (
+                <Link
+                  to={`/admin/${routes.eventCreation.base}/${organization?.id}`}
+                  onClick={() => {
+                    setEventIdValue(event.id);
+                  }}
+                  key={event.id + 100}
+                >
+                  <EventCard event={event} key={event.id} />
+                </Link>
+              );
             })}
           </div>
         </Tabs.Item>
         <Tabs.Item text="Past Events" hideBorderBottom={true}>
-          <div tw=" flex flex-row flex-wrap">
+          <div tw=" flex flex-row flex-wrap w-full">
             {pastEvents?.map((event: EventResDto) => {
-              return <EventCard event={event} />;
+              return (
+                <Link
+                  to={`/admin/${routes.eventCreation.base}/${organization?.id}`}
+                  onClick={() => {
+                    setEventIdValue(event.id);
+                  }}
+                  key={event.id + 100}
+                >
+                  <EventCard event={event} tw="cursor-pointer" key={event.id} />
+                </Link>
+              );
             })}
           </div>
         </Tabs.Item>

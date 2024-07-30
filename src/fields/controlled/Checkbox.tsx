@@ -46,7 +46,7 @@ export const Checkbox = (props: ICheckboxProps) => {
           backgroundSize: 15,
           backgroundPositionX: 1,
           backgroundPositionY: 1.5,
-          backgroundImage: props.value ? `url(../svg/checkmark.svg)` : "unset",
+          backgroundImage: "unset",
         }}
       />
     </div>

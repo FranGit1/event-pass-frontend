@@ -11,6 +11,24 @@
     "signOut": "Sign out",
     "createEvent": "Create event",
     "liveEvents": "live events",
-    "yourOrganizations": "Your organizations"
+    "yourOrganizations": "Your organizations",
+    "logintoSave": "Please log in to save items to favourites.",
+    "removeFromFavorites": "Removed from favourites!",
+    "addedToFavorites": "Added to favourites!",
+    "favorites": "Favourites",
+    "noFavoritesTitle": "There are no organizations saved to your favourites yet.",
+    "noFavorites": "Start exploring and adding organizations to create your favourites list.",
+    "myFavorites": "My favourites",
+    "forgotPassword": "Forgot password",
+    "logIn": "Log in",
+    "login": "Log in",
+    "signUp": "Sign up",
+    "loginMessage": "Let's get started!",
+    "projectFiles": "Event thumbnail",
+    "acceptedFiles1": "Accepted file types: JPEG, PNG. ",
+    "acceptedFilesSub1": "We recommend to keep the images up to 1MB.",
+    "thumbDesc": "This image is the small representation of your event on landing page.",
+    "dragFiles": "Drag and drop or click to browse files",
+    "deleteEvent": "Delete event"
   }
 }

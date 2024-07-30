@@ -6,6 +6,7 @@ import { FormDatePicker } from "./FormDatePicker";
 import { FormRadioGroup } from "./FormRadioGroup";
 import { FormRichTextEditor } from "./FormRichTextArea";
 import { FormCheckboxGroup } from "./FormCheckboxGroup";
+import { FormFileField } from "./file-field/FormFileField";
 
 export const Form = {
   TextInput: FormTextInput,
@@ -16,4 +17,5 @@ export const Form = {
   RadioGroup: FormRadioGroup,
   CheckboxGroup: FormCheckboxGroup,
   RichTextEditor: FormRichTextEditor,
+  Files: FormFileField,
 };

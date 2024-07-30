@@ -1,21 +1,19 @@
 import "twin.macro";
 import { Navigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-import { BaseLayout } from "../../pages/admin/BaseLayout";
+import { BaseLayoutBuyer } from "../../pages/buyer/BaseLayoutBuyer";
 import { routes } from "./routing";
+import { Landing } from "../../pages/buyer/home/Landing";
 
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path={routes.admin.base} element={<BaseLayout />}>
-        {/* <Route
-          index
-          element={<Navigate to={adminRoutes.homePage.overview} />}
-        /> */}
-        {/* <Route path={adminRoutes.homePage.overview} element={<Home />} /> */}
+      <Route path={routes.base} element={<BaseLayoutBuyer />}>
+        <Route index element={<Navigate to={routes.landing.base} />} />
+        <Route path={routes.landing.base} element={<Landing />} />
       </Route>
 
-      <Route path="*" element={<Navigate to={routes.admin.base} />} />
+      <Route path="*" element={<Navigate to={routes.base} />} />
     </Routes>
   );
 };
