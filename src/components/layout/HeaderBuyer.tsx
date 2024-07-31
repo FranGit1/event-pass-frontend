@@ -5,7 +5,7 @@ import { PageContainer } from "./PageContainer";
 
 export const HeaderBuyer = () => {
   return (
-    <PageContainer>
+    <PageContainer containerCss={[tw`px-30!`]}>
       <div tw="w-full flex flex-row justify-between items-center ">
         <img
           tw="h-20 w-20"

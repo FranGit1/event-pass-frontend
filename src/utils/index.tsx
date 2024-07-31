@@ -2,6 +2,7 @@ import { format, isBefore, parseISO } from "date-fns";
 import React, { FunctionComponent, SVGProps } from "react";
 import tw from "twin.macro";
 import { CreateEventDto, EventResDto, FetchedEventData, Maybe } from "../types";
+import hr from "date-fns/locale/hr";
 
 export const errorMessageStrings = {
   passwordRequired: "passwordRequiredError",
@@ -169,4 +170,36 @@ export const getMimeType = (fileName: string) => {
     default:
       return "application/octet-stream";
   }
+};
+
+export const formatDateBuyer = (dateString: string) => {
+  const date = parseISO(dateString);
+  return format(date, "d. MMMM yyyy. 'u' HH:mm", { locale: hr });
+};
+
+export const formatDateNameOfTheMonth = (dateString: string) => {
+  const date = parseISO(dateString);
+  const monthNames = [
+    "sij",
+    "vel",
+    "ožu",
+    "tra",
+    "svi",
+    "lip",
+    "srp",
+    "kol",
+    "ruj",
+    "lis",
+    "stu",
+    "pro",
+  ];
+  const month = monthNames[date.getMonth()];
+
+  return `${month}`;
+};
+
+export const formatDateDayOfTheMonth = (dateString: string) => {
+  const date = parseISO(dateString);
+  const day = date.getDate();
+  return day < 10 ? `0${day}` : `${day}`;
 };

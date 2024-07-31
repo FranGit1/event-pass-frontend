@@ -111,6 +111,10 @@ export type EventTopic = {
   name: string;
   id: number;
 };
+export type EventOrganization = {
+  title: string;
+  id: number;
+};
 
 export type CreateEventDto = {
   description: string;
@@ -163,3 +167,19 @@ export type EventResDto = {
   displayInSlider: boolean;
   sliderPosition: number;
 };
+
+export interface FetchedEventDataBuyer {
+  id: number;
+  title: string;
+  description: string;
+  location: EventLocation;
+  organization: EventOrganization;
+  price: string;
+  startDate: string;
+  topic: EventTopic;
+  endDate: string;
+  keywords: string;
+  featuredImage: string;
+  displayInSlider: boolean;
+  sliderPosition: number;
+}

@@ -17,6 +17,7 @@ export const queryKeys = {
   organizerFavoritesIds: "organizerFavoritesIds",
   organizerFavorites: "organizerFavorites",
   eventByEventId: "eventByEventId",
+  liveEvents: "liveEvents",
 };
 
 export const useIsAuthenticated = () => {
@@ -80,6 +81,18 @@ export function useGetFavoritesForOrganizer() {
     queryKey: [queryKeys.organizerFavorites],
     queryFn: async () => {
       return http.getOrganizersFavorites();
+    },
+    staleTime: 0,
+  });
+}
+
+//Buyer queries
+
+export function useGetLiveEvents() {
+  return useQuery({
+    queryKey: [queryKeys.liveEvents],
+    queryFn: async () => {
+      return http.getLiveEvents();
     },
     staleTime: 0,
   });

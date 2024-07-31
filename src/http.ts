@@ -4,6 +4,7 @@ import {
   CreateEventDto,
   EventResDto,
   FetchedEventData,
+  FetchedEventDataBuyer,
   LoginForm,
   Organization,
   OrganizationsForSearch,
@@ -234,6 +235,17 @@ class HTTP {
         token,
       });
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  //Buyer
+
+  getLiveEvents = async (): Promise<FetchedEventDataBuyer[]> => {
+    try {
+      const response = await axiosAuthenticated.get(`events/live/get-all`);
+      return response.data.payload;
     } catch (error) {
       throw error;
     }

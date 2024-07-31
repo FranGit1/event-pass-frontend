@@ -3,11 +3,11 @@ import { Typography } from "../ui/Typography";
 import { formatDate } from "../utils";
 import tw from "twin.macro";
 
-interface IEventCardProps {
+interface IEventCardAdminProps {
   event: EventResDto;
 }
 
-export const EventCard = ({ event }: IEventCardProps) => {
+export const EventCardAdmin = ({ event }: IEventCardAdminProps) => {
   return (
     <div tw="flex flex-col mx-5 my-8 bg-primary-500 w-fit p-4 min-w-[330px] gap-y-20 text-white rounded-xl">
       <Typography.H2>{event.title}</Typography.H2>

@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetOrganizationEvents } from "../../../queries";
 import { PageContainer } from "../../../components/layout/PageContainer";
 import { EventResDto, Organization } from "../../../types";
-import { EventCard } from "../../../components/EventCard";
+import { EventCardAdmin } from "../../../components/EventCardAdmin";
 import tw from "twin.macro";
 import { Tabs } from "../../../ui/layout/Tabs";
 import { separateEvents } from "../../../utils";
@@ -96,7 +96,7 @@ export const OrganizationEvents = () => {
                   }}
                   key={event.id + 100}
                 >
-                  <EventCard event={event} key={event.id} />
+                  <EventCardAdmin event={event} key={event.id} />
                 </Link>
               );
             })}
@@ -113,7 +113,11 @@ export const OrganizationEvents = () => {
                   }}
                   key={event.id + 100}
                 >
-                  <EventCard event={event} tw="cursor-pointer" key={event.id} />
+                  <EventCardAdmin
+                    event={event}
+                    tw="cursor-pointer"
+                    key={event.id}
+                  />
                 </Link>
               );
             })}
