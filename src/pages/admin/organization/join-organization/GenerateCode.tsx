@@ -71,10 +71,10 @@ const GenerateCode = (props: IGenerateCodeProps) => {
           {t("back")}
         </Button.Text>
         <Typography.H2 containerCss={[tw`mb-4`]}>
-          Join organization{" "}
+          Generate organization code{" "}
         </Typography.H2>
         <Typography.Body containerCss={[tw`mb-10`]}>
-          Here you can join organization via invitation code you got
+          Here you can generate organization invitation code
         </Typography.Body>
 
         <Select

@@ -38,7 +38,7 @@ export const OrganizationEvents = () => {
   return isFetched ? (
     <PageContainer containerCss={[tw`w-full ml-0 mt-14 pl-0!`]}>
       <Button.Text
-        containerCss={[tw` self-start mt-10 pb-4 hidden min-w-0 pl-16 md:flex`]}
+        containerCss={[tw` self-start mt-4 pb-4 hidden min-w-0 pl-16 md:flex`]}
         lead={IoChevronBack}
         onClick={() => {
           navigate(routes.base);
@@ -56,14 +56,28 @@ export const OrganizationEvents = () => {
 
           <Typography.H2>{organization?.title}</Typography.H2>
         </div>
-        <Button.Contained
-          containerCss={[tw`w-fit mt-4`]}
-          onClick={() => {
-            leaveOrganizationMutation.mutateAsync();
-          }}
-        >
-          Leave organization
-        </Button.Contained>
+        <div tw="flex flex-row items-center gap-x-4 my-4">
+          <Button.Contained
+            containerCss={[tw`min-w-[11.6rem]!`]}
+            onClick={() => {
+              if (organization) {
+                navigate(
+                  `/admin/${routes.eventCreation.base}/${organization.id}`
+                );
+              }
+            }}
+          >
+            {t("createEvent")}
+          </Button.Contained>
+          <Button.Outlined
+            containerCss={[tw`w-fit`]}
+            onClick={() => {
+              leaveOrganizationMutation.mutateAsync();
+            }}
+          >
+            Leave organization
+          </Button.Outlined>
+        </div>
       </div>
 
       <Tabs

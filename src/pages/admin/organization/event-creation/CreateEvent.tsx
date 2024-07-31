@@ -127,7 +127,7 @@ export const CreateEventForm = (props: ICreateEventFormProps) => {
 
             {props.eventIdValue && (
               <Button.Contained
-                containerCss={[tw``]}
+                containerCss={[tw`bg-error`]}
                 onClick={() => {
                   if (props.eventIdValue)
                     deleteEventMutation.mutateAsync(props.eventIdValue);

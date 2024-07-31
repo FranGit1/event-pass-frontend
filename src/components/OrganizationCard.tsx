@@ -117,7 +117,7 @@ export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
             navigate(`/admin/${routes.eventCreation.base}/${organization.id}`);
           }}
         >
-          {t("createEvent")}{" "}
+          {t("createEvent")}
         </Button.Contained>
       </div>
     </div>
