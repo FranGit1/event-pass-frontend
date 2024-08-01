@@ -61,6 +61,8 @@ export const OrganizationEvents = () => {
             containerCss={[tw`min-w-[11.6rem]!`]}
             onClick={() => {
               if (organization) {
+                setEventIdValue(undefined);
+
                 navigate(
                   `/admin/${routes.eventCreation.base}/${organization.id}`
                 );

@@ -12,14 +12,14 @@ interface IEventSliderProps {
 const CustomLeftArrow = ({ ...rest }) => (
   <ChevronLeft
     {...rest}
-    tw="absolute top-1/2 left-80 cursor-pointer text-gray bg-white opacity-70 hover:(opacity-100) active:(border-2 border-primary opacity-100 duration-0) rounded-full p-2 w-10 h-10 shadow-md transition-all duration-300"
+    tw="absolute top-1/2 left-75.75 cursor-pointer text-gray bg-white opacity-70 hover:(opacity-100) active:(border-2 border-primary opacity-100 duration-0) rounded-full p-2 w-10 h-10 shadow-md transition-all duration-300"
   />
 );
 
 const CustomRightArrow = ({ ...rest }) => (
   <ChevronRight
     {...rest}
-    tw="absolute top-1/2 right-80 cursor-pointer text-gray bg-white opacity-70 hover:(opacity-100) active:(border-2 border-primary opacity-100 duration-0) rounded-full p-2 w-10 h-10 shadow-md transition-all duration-300"
+    tw="absolute top-1/2 right-75.75 cursor-pointer text-gray bg-white opacity-70 hover:(opacity-100) active:(border-2 border-primary opacity-100 duration-0) rounded-full p-2 w-10 h-10 shadow-md transition-all duration-300"
   />
 );
 
@@ -34,7 +34,7 @@ export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
       containerClass="container"
       slidesToSlide={1}
       responsive={responsiveSingle}
-      tw="flex self-center"
+      tw="flex self-center rounded-lg"
     >
       {sliderEvents.map((event, index) => (
         <img
@@ -42,7 +42,7 @@ export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
           src={event.featuredImage}
           alt={`event image ${index}`}
           css={[
-            tw`h-120 object-cover w-full md:(h-120 w-full object-scale-down  rounded-lg	)`,
+            tw`h-120 object-cover w-full md:(h-120  object-cover  rounded-lg	)`,
           ]}
         />
       ))}

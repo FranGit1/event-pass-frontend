@@ -25,7 +25,7 @@ export const EventCard = ({ event }: IEventCardProps) => {
         }}
       ></div>
 
-      <div tw="flex flex-row bg-gray-600 gap-x-4 pt-4 px-4 pb-8 rounded-b-xl">
+      <div tw="flex flex-row bg-gray-600 gap-x-4 pt-4 px-4 pb-8 rounded-b-xl  min-h-[9.5rem]">
         <div tw="flex flex-col">
           <Typography.Body containerCss={[tw`text-primary-500 uppercase`]}>
             {formatDateNameOfTheMonth(event.startDate)}

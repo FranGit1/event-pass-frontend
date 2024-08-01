@@ -27,8 +27,8 @@ const createEventSchemaObject = yup.object().shape({
     endDate: yup.date().required(),
     keywords: yup.string().required(),
     featuredImage: yup.array(yup.mixed().required()).min(1).max(1),
-    displayInSlider: yup.boolean().required(),
-    sliderPosition: yup.number().required(),
+    displayInSlider: yup.boolean().nullable(),
+    sliderPosition: yup.number().nullable(),
     location: yup.object().shape({
       id: yup.number().nullable(),
       city: yup.string().required(),

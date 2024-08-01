@@ -6,9 +6,10 @@ import {
   ReactComponent,
   TwinStyle,
 } from "../../types";
+import { KeyboardEvent } from "react";
 
 import { FieldLabel } from "../components/FieldLabel";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, SetStateAction, useRef } from "react";
 import { addAsterisk } from "../../utils";
 import tw from "twin.macro";
 
@@ -49,12 +50,14 @@ const BaseTextInput = ({
   textCss,
   disabledCss,
   onTrailIconClick,
+  onKeyDown,
   ...inputProps
 }: PropsWithChildren<IBaseTextInputProps>) => {
   const Lead = lead;
   const Trail = trail;
   const leadStyle = [tw`mr-3 w-4.75 h-4.75`, leadCss];
   const trailStyle = [tw`ml-3 w-4.75 h-4.75`, trailCss];
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div css={[containerCss]}>
@@ -70,7 +73,7 @@ const BaseTextInput = ({
       <div
         className="group"
         css={[
-          tw`flex flex-row items-center py-3 px-5 border-2 border-transparent   `,
+          tw`flex flex-row items-center py-3 px-5 border-1 border-transparent `,
           tw`focus-within:(hover:(text-black)) `,
           !error && tw`hover:(border-2 border-primary bg-white text-primary)`,
           // error && tw`placeholder:(text-sold)`,
@@ -86,9 +89,11 @@ const BaseTextInput = ({
         {Lead && <Lead css={leadStyle} containerCss={leadStyle} />}
         <input
           {...inputProps}
+          ref={inputRef}
           value={inputProps.value ?? ""}
           type={(inputProps.type ?? "text") as any}
           onChange={(e) => onChange(e.target.value)}
+          onKeyDown={onKeyDown}
           css={[
             tw`ring-0 outline-none flex-1 bg-inherit`,
             textCss,
@@ -109,12 +114,7 @@ const BaseTextInput = ({
 
 export type ITextInputProps = Omit<
   IBaseTextInputProps,
-  | "inputCss"
-  | "focusedCss"
-  | "bluredCss"
-  | "errorCss"
-  | "textCss"
-  | "disabledCss"
+  "inputCss" | "focusedCss" | "bluredCss" | "errorCss" | "disabledCss"
 >;
 
 export const TextInput = {
@@ -125,8 +125,8 @@ export const TextInput = {
         {...rest}
         error={error}
         inputCss={[
-          tw`rounded-full bg-white border-2 border-gray-light`,
-          tw`focus-within:(border-2 border-primary bg-white )`,
+          tw`rounded-md bg-white border-1 border-gray`,
+          tw`focus-within:(border-2 border-primary bg-white ring-2 ring-primary-400)`,
           props.error && tw`focus-within:(ring-error-light)`,
           props.error && tw`focus-within:ring-error-light`,
         ]}
@@ -189,7 +189,7 @@ export const TextInput = {
     );
   },
   Rounded: (props: PropsWithChildren<ITextInputProps>) => {
-    const { leadCss, trailCss, error, ...rest } = props;
+    const { leadCss, trailCss, error, textCss, ...rest } = props;
     return (
       <BaseTextInput
         {...rest}
@@ -199,6 +199,7 @@ export const TextInput = {
           tw`focus-within:(border-2 border-primary bg-white)`,
           props.error && tw`focus-within:(ring-error-light)`,
           props.error && tw`focus-within:ring-error-light`,
+          props.containerCss,
         ]}
         errorCss={[tw`border-error`]}
         leadCss={[
@@ -219,6 +220,7 @@ export const TextInput = {
           tw`group-focus-within:(placeholder:(text-gray-light) text-gray) -tracking-0.03  text-gray font-normal placeholder:(text-gray )`,
           props.disabled && tw`text-gray placeholder:text-gray`,
           props.error && tw`text-black placeholder:text-black`,
+          textCss,
         ]}
         disabledCss={[tw`bg-white border-gray hover:(bg-white  border-gray )`]}
       >

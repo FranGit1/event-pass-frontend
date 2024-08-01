@@ -58,11 +58,16 @@ export const CreateEventForm = (props: ICreateEventFormProps) => {
   const updateEventMutation = useMutation({
     mutationFn: (data: { eventData: CreateEventDto; eventId: number }) =>
       http.updateEvent(data.eventData, data.eventId),
-    onSuccess: () => {},
+    onSuccess: () => {
+      toast.success(t("eventUpdatedSuccess"));
+    },
   });
   const deleteEventMutation = useMutation({
     mutationFn: (eventId: number) => http.deleteEvent(eventId),
-    onSuccess: () => {},
+    onSuccess: () => {
+      toast.success(t("eventDeletedSuccess"));
+      navigate(routes.base);
+    },
   });
 
   type CreateEventFormInferred = yup.InferType<typeof CreateEventSchema>;

@@ -29,6 +29,14 @@
     "acceptedFilesSub1": "Preporučamo da slike budu veličine do 1 MB.",
     "thumbDesc": "Ova slika je mali prikaz vašeg projekta na početnoj stranici.",
     "dragFiles": "Dovuci ili pretraži datoteke",
-    "deleteEvent": "Obriši događaj"
+    "deleteEvent": "Obriši događaj",
+    "searchEvents": "Pregledaj nadolazeće događaje i osiguraj svoje ulaznice!",
+    "searchEventsPlaceholder": "Pretraži događaje",
+    "eventDeletedSuccess": "Događaj je uspješno obrisan",
+    "eventUpdatedSuccess": "Događaj je uspješno ažuriran",
+    "showLess": "Prikaži manje",
+    "showMore": "Prikaži više",
+    "landingCopy": "Želite li da se vaš događaj nađe u ponudi Event Passa?",
+    "contactUs": "Kontaktirajte nas"
   }
 }

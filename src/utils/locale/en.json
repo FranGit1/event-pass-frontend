@@ -29,6 +29,14 @@
     "acceptedFilesSub1": "We recommend to keep the images up to 1MB.",
     "thumbDesc": "This image is the small representation of your event on landing page.",
     "dragFiles": "Drag and drop or click to browse files",
-    "deleteEvent": "Delete event"
+    "deleteEvent": "Delete event",
+    "searchEvents": "Browse upcoming events and get your tickets today!",
+    "searchEventsPlaceholder": "Search events",
+    "eventDeletedSuccess": "Event deleted successfully",
+    "eventUpdatedSuccess": "Event updated successfully",
+    "showLess": "Show Less",
+    "showMore": "Show More",
+    "landingCopy": "Do you want your event to be found in the Event Pass offer?",
+    "contactUs": "Contact us"
   }
 }
