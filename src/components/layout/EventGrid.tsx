@@ -4,6 +4,7 @@ import { EventCard } from "../EventCardBuyer";
 import { Button } from "../../ui/buttons/Button";
 import { useTranslation } from "react-i18next";
 import { IoChevronDown } from "react-icons/io5";
+import { IoChevronUp } from "react-icons/io5";
 import tw from "twin.macro";
 
 interface IEventGridProps {
@@ -34,7 +35,7 @@ const EventGrid: React.FC<IEventGridProps> = ({ data, searchTerm }) => {
       {data.length > 8 && (
         <Button.Outlined
           onClick={toggleExpand}
-          trail={IoChevronDown}
+          trail={expanded ? IoChevronUp : IoChevronDown}
           containerCss={[tw`self-center my-10`]}
         >
           {expanded ? t("showLess") : t("showMore")}

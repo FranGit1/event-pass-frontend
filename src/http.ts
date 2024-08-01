@@ -211,7 +211,9 @@ class HTTP {
       throw error;
     }
   };
-  getEventByEventId = async (eventId: number): Promise<FetchedEventData> => {
+  getEventByEventId = async (
+    eventId: number
+  ): Promise<FetchedEventDataBuyer> => {
     try {
       const response = await axiosAuthenticated.get(`events/${eventId}`);
       return response.data.payload;

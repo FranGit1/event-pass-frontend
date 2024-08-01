@@ -152,22 +152,6 @@ export interface FetchedEventData {
   sliderPosition: number;
 }
 
-export type EventResDto = {
-  id: number;
-  organizer: string;
-  title: string;
-  description: string;
-  location: EventLocation;
-  price: number;
-  topic: string;
-  startDate: string;
-  endDate: string;
-  keywords: string;
-  featuredImage: string;
-  displayInSlider: boolean;
-  sliderPosition: number;
-};
-
 export interface FetchedEventDataBuyer {
   id: number;
   title: string;
@@ -183,3 +167,19 @@ export interface FetchedEventDataBuyer {
   displayInSlider: boolean;
   sliderPosition: number;
 }
+
+export type EventResDto = {
+  id: number;
+  organizer: string;
+  title: string;
+  description: string;
+  location: EventLocation;
+  price: number;
+  topic: string;
+  startDate: string;
+  endDate: string;
+  keywords: string;
+  featuredImage: string;
+  displayInSlider: boolean;
+  sliderPosition: number;
+};

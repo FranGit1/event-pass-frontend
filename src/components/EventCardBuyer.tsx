@@ -7,14 +7,21 @@ import {
 } from "../utils";
 import tw from "twin.macro";
 import { CiHeart } from "react-icons/ci";
+import { useNavigation } from "../hooks/use-navigation";
 
 interface IEventCardProps {
   event: FetchedEventDataBuyer;
 }
 
 export const EventCard = ({ event }: IEventCardProps) => {
+  const { navigate } = useNavigation();
   return (
-    <div tw="flex flex-col  p-4 max-w-[22rem] rounded-xl">
+    <div
+      tw="flex flex-col  p-4 max-w-[22rem] rounded-xl cursor-pointer"
+      onClick={() => {
+        navigate(`/buyer/event/${event.id}`);
+      }}
+    >
       <div
         css={[tw`rounded-t-xl relative`]}
         style={{
