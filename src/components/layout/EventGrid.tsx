@@ -8,9 +8,10 @@ import tw from "twin.macro";
 
 interface IEventGridProps {
   data: FetchedEventDataBuyer[];
+  searchTerm: string;
 }
 
-const EventGrid: React.FC<IEventGridProps> = ({ data }) => {
+const EventGrid: React.FC<IEventGridProps> = ({ data, searchTerm }) => {
   const [expanded, setExpanded] = useState(false);
   const { t } = useTranslation();
   const toggleExpand = () => {
@@ -22,9 +23,13 @@ const EventGrid: React.FC<IEventGridProps> = ({ data }) => {
   return (
     <div tw="flex flex-col ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-        {visibleData.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
+        {visibleData.map((event) => {
+          if (
+            event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            event.title === ""
+          )
+            return <EventCard key={event.id} event={event} />;
+        })}
       </div>
       {data.length > 8 && (
         <Button.Outlined

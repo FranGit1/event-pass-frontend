@@ -54,7 +54,7 @@ export const Landing = () => {
               onKeyDown={handleEnterClick}
             ></TextInput.Rounded>
           </div>
-          <EventGrid data={data} />
+          <EventGrid data={data} searchTerm={searchTerm} />
         </div>
 
         <div tw="flex flex-row justify-center items-start mt-20">
