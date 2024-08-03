@@ -4,6 +4,8 @@ import { ReactComponent as ChevronLeft } from "../assets/icons/chevron-left.svg"
 import { ReactComponent as ChevronRight } from "../assets/icons/chevron-right.svg";
 import { responsiveSingle } from "../utils/breakpoints";
 import tw from "twin.macro";
+import { useTranslation } from "react-i18next";
+import { useNavigation } from "../hooks/use-navigation";
 
 interface IEventSliderProps {
   sliderEvents: FetchedEventData[];
@@ -24,10 +26,16 @@ const CustomRightArrow = ({ ...rest }) => (
 );
 
 export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
+  const { navigate } = useNavigation();
+
+  const sortedSliderEvents = sliderEvents.sort(
+    (a, b) => a.sliderPosition - b.sliderPosition
+  );
+
   return (
     <Carousel
       css={[tw`max-w-full mt-20 overflow-x-hidden`]}
-      showDots
+      showDots={true}
       infinite
       customLeftArrow={<CustomLeftArrow />}
       customRightArrow={<CustomRightArrow />}
@@ -36,13 +44,16 @@ export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
       responsive={responsiveSingle}
       tw="flex self-center rounded-lg"
     >
-      {sliderEvents.map((event, index) => (
+      {sortedSliderEvents.map((event, index) => (
         <img
           key={index}
           src={event.featuredImage}
+          onClick={() => {
+            navigate(`/buyer/event/${event.id}`);
+          }}
           alt={`event image ${index}`}
           css={[
-            tw`h-120 object-cover w-full md:(h-120  object-cover  rounded-lg	)`,
+            tw`h-120 object-cover w-full md:(h-120  object-cover rounded-lg cursor-pointer	)`,
           ]}
         />
       ))}

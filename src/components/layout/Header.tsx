@@ -12,19 +12,16 @@ import { Button } from "../../ui/buttons/Button";
 import { MobileMenu } from "./MobileMenu";
 import { ReactComponent as Home } from "../../assets/icons/home.svg";
 import { IComponentBaseProps } from "../../types";
-import { useParams } from "react-router-dom";
 import { routes } from "../../navigation/admin/routing";
 
 export interface IHeaderProps extends IComponentBaseProps {}
 
 export const Header = (props: IHeaderProps) => {
-  const { navigate, location } = useNavigation();
-  const { slug } = useParams();
+  const { navigate } = useNavigation();
   const [open, { toggle, off }] = useBoolean(false);
   const isMobile = useMedia("(max-width: 1200px)");
   const { auth } = useAuth();
 
-  const isHomePage = location.pathname === `${slug}/${routes.base}`;
   const { t } = useTranslation();
 
   return (
@@ -40,38 +37,34 @@ export const Header = (props: IHeaderProps) => {
           alt=""
           css={[tw`w-20 h-8 cursor-pointer`]}
           onClick={() => {
-            navigate(`/${slug}`);
+            navigate(`/`);
           }}
         />
         <div tw="flex items-center cursor-pointer relative">
-          {isHomePage ? null : (
-            <Button.Text
-              onClick={() => {
-                navigate(`/${slug}`);
-              }}
-              containerCss={[tw`hidden md:block`, isHomePage && tw`hidden`]}
-              leadCss={[tw`text-primary h-6 w-6`]}
-              //@ts-ignore
-              lead={Home}
-            >
-              {t("home")}
-            </Button.Text>
-          )}
+          <Button.Text
+            onClick={() => {
+              navigate(`/`);
+            }}
+            containerCss={[tw`hidden md:block`]}
+            leadCss={[tw`text-primary h-6 w-6`]}
+            //@ts-ignore
+            lead={Home}
+          >
+            {t("home")}
+          </Button.Text>
 
           <Button.Text
             onClick={() =>
               auth.token ? toggle() : navigate(routes.auth.login)
             }
-            containerCss={[tw`hidden md:block`, isHomePage && tw`hidden`]}
+            containerCss={[tw`hidden md:block`]}
             leadCss={[tw`text-primary h-6 w-6`]}
             //@ts-ignore
             lead={ProfileIcon}
           >
             {auth.token ? t("myProfile") : t("login")}
           </Button.Text>
-
           <LanguageSelect containerCss={[tw`hidden md:block`]} />
-
           <HamburgerIcon onClick={() => toggle()} tw="block md:hidden" />
           {open && !isMobile && (
             <div

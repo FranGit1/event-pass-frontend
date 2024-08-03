@@ -11,6 +11,7 @@
     "signOut": "Odjava",
     "createEvent": "Kreiraj događaj",
     "liveEvents": "Trenutni događaji",
+    "pastEvents": "Prošli događaji",
     "yourOrganizations": "Vaše organizacije",
     "logintoSave": "Prijavite se da biste spremili organizacije u favorite.",
     "removeFromFavorites": "Uklonjeno iz favorita!",
@@ -37,6 +38,9 @@
     "showLess": "Prikaži manje",
     "showMore": "Prikaži više",
     "landingCopy": "Želite li da se vaš događaj nađe u ponudi Event Passa?",
-    "contactUs": "Kontaktirajte nas"
+    "contactUs": "Kontaktirajte nas",
+    "atLocation": "na lokaciji",
+    "buyTickets": "Kupi ulaznice",
+    "dateTime": "Datum i vrijeme"
   }
 }

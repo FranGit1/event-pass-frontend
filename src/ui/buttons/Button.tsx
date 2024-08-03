@@ -136,7 +136,7 @@ export const Button = {
         ]}
         textCss={[
           isPrimary
-            ? tw`text-white`
+            ? tw`text-white `
             : tw`text-primary hover:(text-primary-100)`,
 
           props.disabled && tw`text-white`,
@@ -209,7 +209,7 @@ export const Button = {
           props.loaderCss,
         ]}
         leadCss={[
-          isPrimary ? tw`text-primary` : tw`text-secondary`,
+          isPrimary ? tw`text-primary ` : tw`text-secondary`,
           props.disabled && tw`text-gray`,
           props.leadCss,
         ]}
@@ -219,7 +219,7 @@ export const Button = {
           props.leadCss,
         ]}
         textCss={[
-          isPrimary ? tw`text-primary` : tw`text-secondary`,
+          isPrimary ? tw`text-primary ` : tw`text-secondary`,
           props.disabled && tw`text-gray`,
           props.textCss,
         ]}
@@ -228,7 +228,7 @@ export const Button = {
             ? tw`bg-white border-primary rounded-3xl`
             : tw`bg-white border-secondary`,
           isPrimary
-            ? tw`hover:(bg-transparent border-primary-100 border-2)`
+            ? tw`hover:(bg-transparent border-gray border-2)`
             : tw`hover:(bg-secondary-300 border-secondary border-2)`,
           isPrimary
             ? tw`focus-visible:(bg-primary-400 border-primary-100 border-2 ring-2 ring-primary-400 outline-none)`

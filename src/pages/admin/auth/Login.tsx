@@ -22,7 +22,11 @@ import { Typography } from "../../../ui/Typography";
 import { Button } from "../../../ui/buttons/Button";
 import { config } from "../../../config";
 
-export const LoginPage = () => {
+interface ILoginPageProps {
+  userRole: string;
+}
+
+export const LoginPage = ({ userRole }: ILoginPageProps) => {
   const { navigateWithSlug, navigate } = useNavigation();
   const queryClient = useQueryClient();
   const { setAuth } = useAuth();
@@ -63,8 +67,12 @@ export const LoginPage = () => {
 
       reCaptchaRef.current.reset();
       const user = await http.login(values);
+      console.log(user);
 
-      if ((!token && user) || (user && isSuccessfull.success)) {
+      if (
+        (!token && user && user.role === userRole) ||
+        (user && isSuccessfull.success && user.role === userRole)
+      ) {
         setAuth(user);
         const intendedDestination = localStorage.getItem("intendedDestination");
         const defaultDestination = routes.base;

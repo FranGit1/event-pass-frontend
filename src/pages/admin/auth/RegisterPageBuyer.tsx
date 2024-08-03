@@ -22,12 +22,11 @@ import { Button } from "../../../ui/buttons/Button";
 import { Form } from "../../../fields/form";
 import { config } from "../../../config";
 
-export const RegisterPage = () => {
-  const { t, i18n } = useTranslation();
+export const RegisterPageBuyer = () => {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const isMobile = useMedia("(max-width: 1200px)");
-  const { slug } = useParams();
   const reCaptchaRef: any = useRef(null);
   const { navigate } = useNavigation();
   const validateRecaptcha = useMutation({
@@ -53,10 +52,6 @@ export const RegisterPage = () => {
         t(errorMessageStrings.repeatPasswordMustMatch)
       ),
     username: yup.string().required(t(errorMessageStrings.lastNameRequired)),
-    companyName: yup.string().required(t(errorMessageStrings.lastNameRequired)),
-    contactInformation: yup
-      .string()
-      .required(t(errorMessageStrings.lastNameRequired)),
   });
 
   type IFormRegister = yup.InferType<typeof schema>;
@@ -67,8 +62,6 @@ export const RegisterPage = () => {
       password: "",
       repeatPassword: "",
       username: "",
-      companyName: "",
-      contactInformation: "",
     },
     //@ts-ignore
     resolver: yupResolver(schema),
@@ -86,7 +79,7 @@ export const RegisterPage = () => {
       console.log(values);
 
       if ((token && isSuccessfull) || !token) {
-        const response = await http.register(values);
+        const response = await http.registerBuyer(values);
         methods.reset();
 
         if (response) {
@@ -137,21 +130,6 @@ export const RegisterPage = () => {
           tw="w-full md:w-full lg:w-1/2"
         />
 
-        <Form.TextInput.Rounded
-          name="companyName"
-          label={t("companyName")}
-          placeholder={t("companyNamePlaceholder")}
-          required={true}
-          tw="w-full md:w-full lg:w-1/2"
-        />
-
-        <Form.TextInput.Rounded
-          name="contactInformation"
-          label={t("contactInfo")}
-          placeholder={t("contactInfoPlaceholder")}
-          required={true}
-          tw="w-full md:w-full lg:w-1/2"
-        />
         <div
           tw="w-full relative"
           onMouseEnter={() => {

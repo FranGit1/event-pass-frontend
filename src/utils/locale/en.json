@@ -10,7 +10,8 @@
     "settings": "Settings",
     "signOut": "Sign out",
     "createEvent": "Create event",
-    "liveEvents": "live events",
+    "liveEvents": "Live events",
+    "pastEvents": "Past events",
     "yourOrganizations": "Your organizations",
     "logintoSave": "Please log in to save items to favourites.",
     "removeFromFavorites": "Removed from favourites!",
@@ -37,6 +38,10 @@
     "showLess": "Show Less",
     "showMore": "Show More",
     "landingCopy": "Do you want your event to be found in the Event Pass offer?",
-    "contactUs": "Contact us"
+    "contactUs": "Contact us",
+    "organizes": "Organizes",
+    "atLocation": "at location",
+    "buyTickets": "Buy tickets",
+    "dateTime": "Date and time"
   }
 }

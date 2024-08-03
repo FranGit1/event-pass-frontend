@@ -36,7 +36,7 @@ export const Landing = () => {
         <div tw="w-[60%] self-center">
           <EventSlider sliderEvents={sliderEvents} />
         </div>
-        <div tw="mt-40 px-22">
+        <div tw="mt-20 px-22">
           <div tw="px-10 mb-20">
             <Typography.H1 containerCss={[tw`max-w-104 mb-8 text-primary`]}>
               {t("searchEvents")}

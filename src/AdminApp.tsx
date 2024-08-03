@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
 i18n.use(initReactI18next).init({
   //@ts-ignore
   resources,
-  lng: "en",
+  lng: "hr",
   interpolation: {
     escapeValue: false,
   },

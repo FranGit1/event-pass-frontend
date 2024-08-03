@@ -1,6 +1,6 @@
-import hr from './hr.json';
-import en from './en.json';
+import hr from "./hr.json";
+import en from "./en.json";
 
-const resources = { en, hr };
+const resources = { hr, en };
 
 export default resources;

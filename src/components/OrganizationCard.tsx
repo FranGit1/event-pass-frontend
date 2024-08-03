@@ -108,7 +108,7 @@ export const OrganizationCard = ({ organization }: IOrganizationCardProps) => {
         </div>
       </div>
       <div tw="flex flex-row items-center justify-between p-4">
-        <Typography.FooterText>
+        <Typography.FooterText containerCss={[tw``]}>
           {organization.liveEventsCount} {t("liveEvents")}
         </Typography.FooterText>
         <Button.Contained

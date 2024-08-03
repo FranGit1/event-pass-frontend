@@ -8,8 +8,9 @@ import { Card } from "../../../ui/layout/Card";
 import { Tabs } from "../../../ui/layout/Tabs";
 import { LoginPage } from "./Login";
 import { RegisterPage } from "./RegisterPage";
+import { RegisterPageBuyer } from "./RegisterPageBuyer";
 
-export const AuthTabsPage = () => {
+export const BuyerAuthTabsPage = () => {
   const { t } = useTranslation();
   const isMobile = useMedia("(max-width: 1200px)");
 
@@ -35,10 +36,10 @@ export const AuthTabsPage = () => {
           >
             <Tabs showTabOnTop={true} showTabsCenter={true}>
               <Tabs.Item text={t("login")} tabFullWidth={true}>
-                <LoginPage userRole="organizer" />
+                <LoginPage userRole="buyer" />
               </Tabs.Item>
               <Tabs.Item text={t("signUp")} tabFullWidth={true}>
-                <RegisterPage />
+                <RegisterPageBuyer />
               </Tabs.Item>
             </Tabs>
           </Card.Elevated>

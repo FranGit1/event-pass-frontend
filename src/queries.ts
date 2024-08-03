@@ -1,12 +1,6 @@
-import {
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import hash from "object-hash";
 import { http } from "./http";
-import { useSetRecoilState } from "recoil";
-import { adminSelectedEventIdAtom } from "./recoil/atoms/adminSelectedEventIdAtom";
 
 export const queryKeys = {
   users: "users",
@@ -15,9 +9,12 @@ export const queryKeys = {
   eventsByOrganization: "eventsByOrganization",
   allOrganizations: "allOrganizations",
   organizerFavoritesIds: "organizerFavoritesIds",
+  buyerFavoritesIds: "buyerFavoritesIds",
   organizerFavorites: "organizerFavorites",
+  buyerFavorites: "buyerFavorites",
   eventByEventId: "eventByEventId",
   liveEvents: "liveEvents",
+  organizationById: "organizationById",
 };
 
 export const useIsAuthenticated = () => {
@@ -64,12 +61,43 @@ export function useGetFavoritesForOrganizerIdsOnly() {
   });
 }
 
+export function useGetFavoritesForBuyerIdsOnly() {
+  return useQuery({
+    queryKey: [queryKeys.buyerFavoritesIds],
+    queryFn: async () => {
+      return http.getBuyersFavoritesIds();
+    },
+    staleTime: 0,
+  });
+}
+
+export function useGetFavoritesForBuyer() {
+  return useQuery({
+    queryKey: [queryKeys.buyerFavorites],
+    queryFn: async () => {
+      return http.getBuyersFavorites();
+    },
+    staleTime: 0,
+  });
+}
+
 export function useGetEventByEventId(eventId: number) {
   return useQuery({
     queryKey: [queryKeys.eventByEventId, eventId],
     queryFn: async () => {
       const response = await http.getEventByEventId(eventId);
       return response;
+    },
+
+    staleTime: 0,
+  });
+}
+
+export function useGetOrganizationById(organizationId: number) {
+  return useQuery({
+    queryKey: [queryKeys.organizationById, organizationId],
+    queryFn: async () => {
+      return http.getOrganizationById(organizationId);
     },
 
     staleTime: 0,

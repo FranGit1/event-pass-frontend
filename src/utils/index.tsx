@@ -203,3 +203,21 @@ export const formatDateDayOfTheMonth = (dateString: string) => {
   const day = date.getDate();
   return day < 10 ? `0${day}` : `${day}`;
 };
+
+export const getTimeFromDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const hours = date.getUTCHours().toString().padStart(2, "0");
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
+
+export const splitEventsByEndDate = (
+  events: EventResDto[]
+): { ongoingEvents: EventResDto[]; pastEvents: EventResDto[] } => {
+  const now = new Date();
+
+  const ongoingEvents = events.filter((event) => new Date(event.endDate) > now);
+  const pastEvents = events.filter((event) => new Date(event.endDate) <= now);
+
+  return { ongoingEvents, pastEvents };
+};

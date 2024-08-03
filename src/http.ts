@@ -7,8 +7,10 @@ import {
   FetchedEventDataBuyer,
   LoginForm,
   Organization,
+  OrganizationDetails,
   OrganizationsForSearch,
   RegisterForm,
+  RegisterFormBuyer,
 } from "./types";
 
 const axiosPublic = axios.create({
@@ -43,24 +45,35 @@ class HTTP {
     const userId = response?.data?.id;
     const email = response?.data?.email;
     const name = response?.data?.name;
+    const role = response?.data?.role;
     const userObject = {
       id: userId,
       email: email,
       name: name,
+      role: role,
     };
 
     if (accessToken && userObject) {
       localStorage.setItem("token", accessToken);
       localStorage.setItem("user", JSON.stringify(userObject));
 
-      return { email: email, accessToken: accessToken, id: userId };
+      return { email: email, accessToken: accessToken, id: userId, role: role };
     }
   };
 
-  register = async (credentials: RegisterForm, language: string) => {
+  register = async (credentials: RegisterForm) => {
     const response = await axiosPublic.post("/auth/register-organizer", {
       ...credentials,
-      language,
+    });
+    if (response.data.success === true) {
+      // await this.login({ email: credentials.email, password: credentials.password });
+      return true;
+    }
+  };
+
+  registerBuyer = async (credentials: RegisterFormBuyer) => {
+    const response = await axiosPublic.post("/auth/register-buyer", {
+      ...credentials,
     });
     if (response.data.success === true) {
       // await this.login({ email: credentials.email, password: credentials.password });
@@ -167,6 +180,16 @@ class HTTP {
       throw error;
     }
   };
+  removeEventFavorite = async (eventId: number) => {
+    try {
+      const response = await axiosAuthenticated.delete(
+        `events/favourite/${eventId}`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
   leaveOrganization = async (organizationId: number) => {
     try {
       const response = await axiosAuthenticated.post(
@@ -189,11 +212,42 @@ class HTTP {
     }
   };
 
+  getBuyersFavorites = async () => {
+    try {
+      const response = await axiosAuthenticated.get(
+        `buyers/favorites/get-favorites-for-buyer`
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getBuyersFavoritesIds = async () => {
+    try {
+      const response = await axiosAuthenticated.get(`buyers/favourite/ids`);
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   addOrganizationToFavorite = async (organizationData: { id: number }) => {
     try {
       const response = await axiosAuthenticated.post(
         `organizations/favourite`,
         organizationData
+      );
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+  addEventToFavorite = async (eventData: { id: number }) => {
+    try {
+      const response = await axiosAuthenticated.post(
+        `events/favourite/create-fav-event`,
+        eventData
       );
       return response.data.payload;
     } catch (error) {
@@ -216,6 +270,18 @@ class HTTP {
   ): Promise<FetchedEventDataBuyer> => {
     try {
       const response = await axiosAuthenticated.get(`events/${eventId}`);
+      return response.data.payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+  getOrganizationById = async (
+    organizationId: number
+  ): Promise<OrganizationDetails> => {
+    try {
+      const response = await axiosAuthenticated.get(
+        `organizations/${organizationId}`
+      );
       return response.data.payload;
     } catch (error) {
       throw error;

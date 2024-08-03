@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FetchedEventDataBuyer } from "../../types";
+import { EventResDto, FetchedEventDataBuyer } from "../../types";
 import { EventCard } from "../EventCardBuyer";
 import { Button } from "../../ui/buttons/Button";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import { IoChevronUp } from "react-icons/io5";
 import tw from "twin.macro";
 
 interface IEventGridProps {
-  data: FetchedEventDataBuyer[];
+  data: FetchedEventDataBuyer[] | EventResDto[];
   searchTerm: string;
 }
 

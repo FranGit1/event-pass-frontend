@@ -72,7 +72,16 @@ export interface RegisterForm {
   password: string;
   firstName: string;
   lastName: string;
-  slug?: string;
+  username: string;
+  companyName: string;
+  contactInformation: string;
+}
+export interface RegisterFormBuyer {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  username: string;
 }
 
 export interface LoginForm {
@@ -168,12 +177,24 @@ export interface FetchedEventDataBuyer {
   sliderPosition: number;
 }
 
+export interface OrganizationDetails {
+  title: string;
+  organizerLogo: string;
+  organizerDescription: string;
+  organizerFacebook: string;
+  organizerLink: string;
+  organizerEmail: string;
+  organizerInstagram: string;
+}
+
 export type EventResDto = {
   id: number;
   organizer: string;
   title: string;
   description: string;
   location: EventLocation;
+  organization: EventOrganization;
+
   price: number;
   topic: string;
   startDate: string;
