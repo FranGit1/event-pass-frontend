@@ -22,7 +22,7 @@ import { CreateEventDto, FetchedEventData } from "../../../../types";
 import { useParams } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import { routes } from "../../../../navigation/admin/routing";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { adminSelectedEventIdAtom } from "../../../../recoil/atoms/adminSelectedEventIdAtom";
 import { useGetEventByEventId } from "../../../../queries";
 import { toast } from "../../../../ui/indicators/Toast";

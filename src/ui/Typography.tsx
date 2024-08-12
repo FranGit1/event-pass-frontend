@@ -152,6 +152,20 @@ export const Typography = {
       </BaseTypography>
     );
   },
+  FooterLinks: (props: PropsWithChildren<ITypographyProps>) => {
+    return (
+      <BaseTypography
+        {...props}
+        containerCss={[
+          tw`text-body font-medium -tracking-0.03 cursor-pointer underline underline-offset-4 `,
+          props.containerCss,
+        ]}
+        element={props.element ?? "p"}
+      >
+        {props.children}
+      </BaseTypography>
+    );
+  },
 
   ButtonPrimary: (props: PropsWithChildren<ITypographyProps>) => {
     return (

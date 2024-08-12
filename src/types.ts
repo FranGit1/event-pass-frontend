@@ -204,3 +204,10 @@ export type EventResDto = {
   displayInSlider: boolean;
   sliderPosition: number;
 };
+
+export type ContactData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string | null;
+};

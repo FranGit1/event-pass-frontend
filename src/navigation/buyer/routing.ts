@@ -4,6 +4,7 @@ export const routes = {
     base: "home",
     organizationDetails: "organization-details/:organizationId",
     favorites: "favorites",
+    contact: "contact",
   },
   eventDetails: "buyer/event/:eventId",
   auth: {

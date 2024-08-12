@@ -16,6 +16,8 @@ import { IoChevronBack } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useSetRecoilState } from "recoil";
 import { adminSelectedEventIdAtom } from "../../../recoil/atoms/adminSelectedEventIdAtom";
+import { useState } from "react";
+import { Modal } from "../../ui/popups/Modal";
 
 export const OrganizationEvents = () => {
   const { organizationId } = useParams();
@@ -34,6 +36,7 @@ export const OrganizationEvents = () => {
       navigate(routes.base);
     },
   });
+  const [openModal, setOpenModal] = useState(false);
 
   return isFetched ? (
     <PageContainer containerCss={[tw`w-full ml-0 mt-14 pl-0!`]}>
@@ -74,7 +77,7 @@ export const OrganizationEvents = () => {
           <Button.Outlined
             containerCss={[tw`w-fit`]}
             onClick={() => {
-              leaveOrganizationMutation.mutateAsync();
+              setOpenModal(true);
             }}
           >
             Leave organization
@@ -126,6 +129,22 @@ export const OrganizationEvents = () => {
           </div>
         </Tabs.Item>
       </Tabs>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        containerCss={[
+          tw`2xl:(w-4/12 px-0 pb-0)  w-[calc(100vw-2rem)] rounded-3xl shadow-xl px-4 pb-18  `,
+        ]}
+        doneButton={true}
+        onProceed={() => {
+          leaveOrganizationMutation.mutateAsync();
+        }}
+        secondaryButtonText={t("cancelButton")}
+        primaryButtonText={t("delete")}
+        buttonCss={[tw`mr-4`]}
+        modalTitle={t("leaveModalTitle")}
+        hideXButton={true}
+      ></Modal>
     </PageContainer>
   ) : (
     <div>Loading</div>

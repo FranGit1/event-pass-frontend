@@ -42,6 +42,26 @@
     "organizes": "Organizes",
     "atLocation": "at location",
     "buyTickets": "Buy tickets",
-    "dateTime": "Date and time"
+    "dateTime": "Date and time",
+    "passwordRequiredError": "Password is a mandatory field.",
+    "passwordBadFormatError": "Create a strong password: 8+ charachters, 1 number, and 1 uppercase letter.",
+    "emailRequiredError": "Email is a mandatory field.",
+    "emailBadFormat": "This email is not valid. Please check your input.",
+    "firstNameRequiredError": "Name is a mandatory field.",
+    "lastNameRequiredError": "Surname is a mandatory field.",
+    "repeatPasswordRequiredError": "Repeat password is a mandatory field.",
+    "repeatPasswordMustMatchError": "Passwords do not match.",
+    "messageRequiredError": "Message is a mandatory field.",
+    "cancelButton": "Cancel",
+    "delete": "Leave",
+    "leaveModalTitle": "Are you sure you want to leave this organization ?",
+    "browse": "Browse",
+    "emailPlaceholder": "Enter email",
+    "namePlaceholder": "Enter name",
+    "surnamePlaceholder": "Enter surname",
+    "password": "Password",
+    "passwordInstruction": "Create a strong password: 8+ characters, 1 number, and 1 uppercase letter.",
+    "passwordPlaceholder": "Enter password",
+    "repeatPasswordPlaceholder": "Repeat password"
   }
 }

@@ -41,6 +41,26 @@
     "contactUs": "Kontaktirajte nas",
     "atLocation": "na lokaciji",
     "buyTickets": "Kupi ulaznice",
-    "dateTime": "Datum i vrijeme"
+    "dateTime": "Datum i vrijeme",
+    "passwordRequiredError": "Lozinka je obavezno polje.",
+    "passwordBadFormatError": "Kreirajte jaku lozinku: 8+ znakova, barem 1 broj i jedno veliko slovo.",
+    "emailRequiredError": "Email je obavezno polje.",
+    "emailBadFormat": "Ovaj mail nije valjan. Provjerite unos.",
+    "firstNameRequiredError": "Ime je obavezno polje.",
+    "lastNameRequiredError": "Prezime je obavezno polje.",
+    "repeatPasswordRequiredError": "Ponovi lozinku je obavezno polje.",
+    "repeatPasswordMustMatchError": "Lozinke se ne podudaraju.",
+    "messageRequiredError": "Poruka je obazveno polje.",
+    "cancelButton": "Odustani",
+    "delete": "Napusti",
+    "leaveModalTitle": "Jeste li sigurni da želite napustiti organizaciju ?",
+    "browse": "Pretraži",
+    "emailPlaceholder": "Unesi email",
+    "namePlaceholder": "Unesi ime",
+    "surnamePlaceholder": "Unesi prezime",
+    "password": "Lozinka",
+    "passwordInstruction": "Koristite snažnu lozinku: 8+ znakova, 1 broj i 1 veliko slovo.",
+    "passwordPlaceholder": "Unesi lozinku",
+    "repeatPasswordPlaceholder": "Ponovi lozinku"
   }
 }

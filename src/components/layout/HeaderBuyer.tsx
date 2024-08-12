@@ -9,6 +9,7 @@ import { Drawer } from "../../ui/layout/Drawer";
 import { useMedia } from "react-use";
 import { useBoolean } from "../../hooks/use-boolean";
 import { MobileMenuBuyer } from "./MobileMenuBuyer";
+import { routes } from "../../navigation/buyer/routing";
 
 export const HeaderBuyer = () => {
   const { navigate } = useNavigation();
@@ -31,6 +32,7 @@ export const HeaderBuyer = () => {
               tw`uppercase text-primary 
             `,
             ]}
+            onClick={() => navigate(routes.landing.contact)}
           >
             Kontaktiraj nas
           </Button.Text>

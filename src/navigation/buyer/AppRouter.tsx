@@ -9,6 +9,7 @@ import { OrganizationDetailsComponent } from "../../pages/buyer/organization/Org
 import { BuyerAuthTabsPage } from "../../pages/admin/auth/BuyerAuthTabsPage";
 import { BuyerFavorites } from "../../pages/buyer/favorites/BuyerFavorites";
 import RequiredAuth from "../../components/RequireAuth";
+import { Contact } from "../../pages/buyer/contact/Contact";
 
 export const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ export const AppRouter = () => {
         <Route path={routes.auth.login} element={<BuyerAuthTabsPage />} />
 
         <Route path={routes.landing.base} element={<Landing />} />
+        <Route path={routes.landing.contact} element={<Contact />} />
         <Route
           path={routes.landing.organizationDetails}
           element={<OrganizationDetailsComponent />}

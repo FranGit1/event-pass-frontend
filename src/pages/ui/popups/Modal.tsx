@@ -1,17 +1,19 @@
-import 'twin.macro';
-import { PropsWithChildren, useRef, useState } from 'react';
-import React from 'react';
-import tw from 'twin.macro';
-import { useAsync } from 'react-use';
-import { HiX } from 'react-icons/hi';
-import { Maybe } from 'yup';
-import { PortalManager } from '../../../components/PortalManager';
-import { IComponentBaseProps, TwinStyle } from '../../../types';
-import { Typography } from '../../../ui/Typography';
-import { Button } from '../../../ui/buttons/Button';
-import { onKeyDownA11Y } from '../../../utils';
-import { waitUntilAnimationFinish } from '../../../utils/wailt-until-animation-finish';
-import { TextInput } from '../../../fields/controlled/TextInput';
+import "twin.macro";
+import { PropsWithChildren, useRef, useState } from "react";
+import React from "react";
+
+import tw from "twin.macro";
+import { useAsync } from "react-use";
+
+import { HiX } from "react-icons/hi";
+import { Maybe } from "yup";
+import { PortalManager } from "../../../components/PortalManager";
+import { IComponentBaseProps, TwinStyle } from "../../../types";
+import { Typography } from "../../../ui/Typography";
+import { Button } from "../../../ui/buttons/Button";
+import { onKeyDownA11Y } from "../../../utils";
+import { waitUntilAnimationFinish } from "../../../utils/wailt-until-animation-finish";
+import { css } from "@emotion/react";
 
 export interface IModalProps extends IComponentBaseProps {
   open: boolean;
@@ -20,22 +22,23 @@ export interface IModalProps extends IComponentBaseProps {
   onExitButton?: () => void;
   doneButton?: boolean;
   outlinedButton?: boolean;
-  outlinedButtonText?: string;
-  containedButtonText?: string;
+  secondaryButtonText?: string;
+  primaryButtonText?: string;
   buttonCss?: Maybe<TwinStyle>;
   titleCss?: Maybe<TwinStyle>;
+  textCss?: Maybe<TwinStyle>;
   containedButtonCss?: Maybe<TwinStyle>;
   modalTitle?: string;
   modalText?: string;
+  modalText2?: string;
   modalChildren?: boolean;
   modalChildrenRadio?: boolean;
-  term: string;
-  setTerm: React.Dispatch<React.SetStateAction<string>>;
+  hideXButton?: boolean;
 }
 
 export const Modal = ({
   doneButton = false,
-  outlinedButton = true,
+  outlinedButton,
   modalChildrenRadio = false,
   ...props
 }: PropsWithChildren<IModalProps>) => {
@@ -48,7 +51,7 @@ export const Modal = ({
   useAsync(async () => {
     document.body.ariaHidden = `${props.open}`;
     if (props.open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
 
       setSoftOpen(true);
       setTimeout(() => {
@@ -57,7 +60,7 @@ export const Modal = ({
         element.focus();
       }, 0);
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
       setHardOpen(false);
       await waitUntilAnimationFinish(parentRef.current);
       setSoftOpen(false);
@@ -65,7 +68,7 @@ export const Modal = ({
   }, [props.open]);
 
   const onClose = async () => {
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
     setHardOpen(false);
     await waitUntilAnimationFinish(parentRef.current);
     setSoftOpen(false);
@@ -74,6 +77,12 @@ export const Modal = ({
   if (!softOpen) {
     return null;
   }
+  const overlayStyles = (hardOpen: any) => css`
+    ${tw`flex justify-center items-center`}
+    ${tw`fixed left-0 right-0 top-0 bottom-0`}
+  ${tw`transition-colors duration-300`}
+  ${hardOpen ? "background: rgba(0, 0, 0, 0.6);" : "background: transparent;"}
+  `;
   return (
     <PortalManager>
       <div
@@ -81,12 +90,7 @@ export const Modal = ({
         onClick={onClose}
         // @ts-ignore
         ref={parentRef}
-        css={[
-          tw`flex justify-center items-center`,
-          tw`fixed left-0 right-0 top-0 bottom-0 `,
-          tw`transition-colors duration-300`,
-          hardOpen ? tw`bg-black` : tw`bg-transparent`
-        ]}
+        css={[overlayStyles(hardOpen)]}
       >
         <div
           tabIndex={0}
@@ -96,38 +100,52 @@ export const Modal = ({
           // @ts-ignore
           ref={contentRef}
           css={[
-            tw`md:m-6 shadow md:rounded-xl relative`,
+            tw`md:m-6 md:rounded-3xl relative`,
             tw`bg-white`,
             tw`transition-opacity duration-300`,
             tw`flex justify-center items-center`,
             tw`focus-visible:outline-0`,
-            // tw`w-full 2xs:max-w-xs xs:max-w-md sm:max-w-xl md:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl`,
+            tw`w-[33%]! pb-0!`,
             // tw`md:w-fit md:h-fit w-full h-[calc(100vh)] p-10`,
             hardOpen ? tw`opacity-100` : tw`opacity-0`,
-            props.containerCss
+            props.containerCss,
           ]}
         >
           <div onKeyDown={(e) => e.stopPropagation()}>
             <>
               {doneButton && (
                 <div tw="p-8">
-                  <div tw="flex justify-between">
-                    <Typography.H2 containerCss={[tw`mb-4 mr-4`, props.titleCss]}>{props.modalTitle}</Typography.H2>
-                    {/* <HiX css={[tw`h-6 w-6 cursor-pointer `]} onClick={() => props.onClose()} /> */}
+                  <div
+                    css={[
+                      tw`flex justify-between`,
+                      props.hideXButton && tw`justify-center`,
+                    ]}
+                  >
+                    <Typography.H2
+                      containerCss={[tw`mb-4 mr-4 text-center`, props.titleCss]}
+                    >
+                      {props.modalTitle}
+                    </Typography.H2>
+                    {!props.hideXButton && (
+                      <HiX
+                        css={[tw`h-6 w-6 cursor-pointer `]}
+                        onClick={() => props.onClose()}
+                      />
+                    )}
                   </div>
-                  <Typography.Caption containerCss={[tw`mb-12`]}>{props.modalText}</Typography.Caption>
-
-                  <TextInput.Contained
-                    value={props.term}
-                    onChange={(value) => {
-                      props.setTerm(value ?? '');
-                    }}
-                    containerCss={[tw`w-full mb-12`]}
-                    placeholder={'RAL npr. 210 50 45'}
-                  />
-                  {modalChildrenRadio && <div css={[tw`p-8 pt-0 `]}>{props.children}</div>}
-                  <div tw="flex w-full ">
-                    {outlinedButton && (
+                  <div css={[props.textCss, tw`mb-10`]}>
+                    <Typography.Body containerCss={[tw`text-center`]}>
+                      {props.modalText}
+                    </Typography.Body>
+                    <Typography.Body containerCss={[tw`text-center`]}>
+                      {props.modalText2}
+                    </Typography.Body>
+                  </div>
+                  {modalChildrenRadio && (
+                    <div css={[tw`p-8 pt-0 `]}>{props.children}</div>
+                  )}
+                  <div tw="flex justify-center">
+                    {!outlinedButton && (
                       <Button.Outlined
                         onClick={() => {
                           props.onClose();
@@ -135,19 +153,21 @@ export const Modal = ({
                         }}
                         containerCss={[props.buttonCss]}
                       >
-                        {props.outlinedButtonText}
+                        {props.secondaryButtonText}
                       </Button.Outlined>
                     )}
                     <Button.Contained
                       onClick={() => props.onProceed?.()}
-                      containerCss={[tw`w-full`, props.containedButtonCss]}
+                      containerCss={[props.containedButtonCss]}
                     >
-                      {props.containedButtonText}
+                      {props.primaryButtonText}
                     </Button.Contained>
                   </div>
                 </div>
               )}
-              {!modalChildrenRadio && props.modalChildren && <div css={[tw`p-8`]}>{props.children}</div>}
+              {!modalChildrenRadio && props.modalChildren && (
+                <div css={[tw`p-8`]}>{props.children}</div>
+              )}
             </>
           </div>
         </div>
