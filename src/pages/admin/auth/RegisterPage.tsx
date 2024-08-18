@@ -103,7 +103,6 @@ export const RegisterPage = () => {
   return (
     <FormProvider {...methods}>
       <form css={[tw`flex flex-col items-start mt-8 md:(w-112 mt-0) `]}>
-        <Typography.H1>Logo</Typography.H1>
         <div tw="w-full flex flex-col lg:flex-row md:flex-col gap-x-4">
           <Form.TextInput.Rounded
             name="firstName"

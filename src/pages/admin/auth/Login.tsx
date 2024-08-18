@@ -101,7 +101,6 @@ export const LoginPage = ({ userRole }: ILoginPageProps) => {
         css={[tw`flex flex-col justify-between h-[65vh] md:(w-112 h-full) `]}
       >
         <div tw="flex flex-col items-center">
-          <Typography.H1>lOGO</Typography.H1>
           <Form.TextInput.Rounded
             name="email"
             label={t("email")}

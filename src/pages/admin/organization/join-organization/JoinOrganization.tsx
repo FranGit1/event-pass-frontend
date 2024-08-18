@@ -45,10 +45,10 @@ export const JoinOrganization = () => {
           {t("back")}
         </Button.Text>
         <Typography.H2 containerCss={[tw`mb-4`]}>
-          Join organization{" "}
+          {t("joinOrganizationText")}
         </Typography.H2>
         <Typography.Body containerCss={[tw`mb-10`]}>
-          Here you can join organization via invitation code you got
+          {t("joinOrganizationWithCode")}
         </Typography.Body>
 
         <TextInput.Contained
@@ -58,7 +58,7 @@ export const JoinOrganization = () => {
           onChange={(value) => setOrganizationCode(value)}
         ></TextInput.Contained>
 
-        <Button.Contained onClick={handleJoin}>Join</Button.Contained>
+        <Button.Contained onClick={handleJoin}>{t("join")}</Button.Contained>
       </div>
     </PageContainer>
   );

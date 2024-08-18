@@ -62,6 +62,69 @@
     "password": "Password",
     "passwordInstruction": "Create a strong password: 8+ characters, 1 number, and 1 uppercase letter.",
     "passwordPlaceholder": "Enter password",
-    "repeatPasswordPlaceholder": "Repeat password"
+    "repeatPasswordPlaceholder": "Repeat password",
+    "generateOrganizationCode": "Generate organization code",
+    "generateOrganizationInvitationCode": "Here you can generate organization invitation code",
+    "chooseOrganization": "Choose organization",
+    "generateInvitationCode": "Generate invitation code",
+    "yourCode": "Your code:",
+    "joinOrganizationText": "Join organization",
+    "joinOrganizationWithCode": "Here you can join organization via invitation code you got",
+    "join": "Join",
+    "repeatPassword": "Confirm password",
+    "contactInfo": "Contact info",
+    "contactInfoPlaceholder": "Input contact info",
+    "companyName": "Company name",
+    "companyNamePlaceholder": "Input company name",
+    "username": "Username",
+    "usernamePlaceholder": "Input username",
+    "surname": "Surname",
+    "name": "Name",
+    "email": "Email",
+    "privacy": "Data Processing & Privacy",
+    "privacyPolicy": "Privacy Policy",
+    "contactUsHeader": "Contact us",
+    "notesInputPlaceholder": "Type your message...",
+    "notesInput": "Your message",
+    "contact": "Contact us",
+    "send": "Send",
+    "cancel": "Cancel",
+    "product": "Product",
+
+    "allEvents": "All events",
+
+    "forOrganizers": "For organizers",
+
+    "requestDemo": "Request demo",
+
+    "company": "Company",
+
+    "eventPass": "Event Pass Ltd.",
+
+    "addressLine1": "Maksimirksa 24,",
+
+    "addressLine2": "10000 Zagreb,",
+
+    "addressLine3": "Croatia,",
+
+    "oib": "VAT ID: 515434335",
+
+    "resources": "Resources",
+
+    "helpCenter": "Help center",
+
+    "clientExperiences": "Client experiences",
+
+    "organizers": "Organizers",
+
+    "blog": "Blog",
+
+    "followUs": "Follow us and be the first to know!",
+
+    "facebook": "Facebook",
+
+    "instagram": "Instagram",
+
+    "linkedin": "LinkedIn"
   }
 }

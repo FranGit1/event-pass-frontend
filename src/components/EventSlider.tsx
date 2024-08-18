@@ -6,6 +6,7 @@ import { responsiveSingle } from "../utils/breakpoints";
 import tw from "twin.macro";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "../hooks/use-navigation";
+import { useMedia } from "react-use";
 
 interface IEventSliderProps {
   sliderEvents: FetchedEventData[];
@@ -27,6 +28,7 @@ const CustomRightArrow = ({ ...rest }) => (
 
 export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
   const { navigate } = useNavigation();
+  const isMobile = useMedia("(max-width: 1200px)");
 
   const sortedSliderEvents = sliderEvents.sort(
     (a, b) => a.sliderPosition - b.sliderPosition
@@ -37,12 +39,12 @@ export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
       css={[tw`max-w-full mt-20 overflow-x-hidden`]}
       showDots={true}
       infinite
-      customLeftArrow={<CustomLeftArrow />}
-      customRightArrow={<CustomRightArrow />}
+      customLeftArrow={isMobile ? null : <CustomLeftArrow />}
+      customRightArrow={isMobile ? null : <CustomRightArrow />}
       containerClass="container"
       slidesToSlide={1}
       responsive={responsiveSingle}
-      tw="flex self-center rounded-lg"
+      tw="flex self-center rounded-none md:(rounded-lg)"
     >
       {sortedSliderEvents.map((event, index) => (
         <img
@@ -53,7 +55,7 @@ export const EventSlider = ({ sliderEvents }: IEventSliderProps) => {
           }}
           alt={`event image ${index}`}
           css={[
-            tw`h-120 object-cover w-full md:(h-120  object-cover rounded-lg cursor-pointer	)`,
+            tw`h-100 rounded-none object-cover w-full md:(h-120  object-cover rounded-lg cursor-pointer	)`,
           ]}
         />
       ))}

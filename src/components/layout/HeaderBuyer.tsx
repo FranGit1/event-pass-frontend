@@ -10,6 +10,7 @@ import { useMedia } from "react-use";
 import { useBoolean } from "../../hooks/use-boolean";
 import { MobileMenuBuyer } from "./MobileMenuBuyer";
 import { routes } from "../../navigation/buyer/routing";
+import LanguageSelect from "../LanguageSelect";
 
 export const HeaderBuyer = () => {
   const { navigate } = useNavigation();
@@ -18,7 +19,7 @@ export const HeaderBuyer = () => {
   const [open, { toggle, off }] = useBoolean(false);
   const isMobile = useMedia("(max-width: 1200px)");
   return (
-    <PageContainer containerCss={[tw`px-30!`]}>
+    <PageContainer containerCss={[tw`px-5! md:(px-30!)`]}>
       <div tw="w-full flex flex-row justify-between items-center ">
         <img
           tw="h-20 w-20 cursor-pointer"
@@ -34,7 +35,7 @@ export const HeaderBuyer = () => {
             ]}
             onClick={() => navigate(routes.landing.contact)}
           >
-            Kontaktiraj nas
+            {t("contactUsHeader")}
           </Button.Text>
           {auth.token ? (
             <Button.Text
@@ -48,12 +49,13 @@ export const HeaderBuyer = () => {
             </Button.Text>
           ) : (
             <Button.Outlined
-              containerCss={[tw`h-fit ml-8`]}
+              containerCss={[tw`h-fit ml-8 uppercase`]}
               onClick={() => navigate("/buyer/login")}
             >
-              PRIJAVA
+              {t("logIn")}
             </Button.Outlined>
           )}
+          <LanguageSelect containerCss={[tw`ml-4 hidden md:block`]} />
         </div>
 
         <Drawer

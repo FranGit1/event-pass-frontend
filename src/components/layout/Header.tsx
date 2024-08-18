@@ -33,13 +33,12 @@ export const Header = (props: IHeaderProps) => {
         ]}
       >
         <img
-          src={""}
-          alt=""
-          css={[tw`w-20 h-8 cursor-pointer`]}
-          onClick={() => {
-            navigate(`/`);
-          }}
+          tw="h-20 w-20 cursor-pointer"
+          onClick={() => navigate(`/`)}
+          src="https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721433600&semt=sph"
+          alt="logo"
         />
+
         <div tw="flex items-center cursor-pointer relative">
           <Button.Text
             onClick={() => {

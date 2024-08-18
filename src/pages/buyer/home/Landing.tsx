@@ -33,11 +33,11 @@ export const Landing = () => {
     isFetched &&
     data && (
       <PageContainer containerCss={[tw`flex flex-col`]}>
-        <div tw="w-[60%] self-center">
+        <div tw="w-[100%] mt-[-5rem] md:(w-[60%] mt-0) self-center">
           <EventSlider sliderEvents={sliderEvents} />
         </div>
-        <div tw="mt-20 px-22">
-          <div tw="px-10 mb-20">
+        <div tw="px-8 mt-10 md:(mt-20 px-22) ">
+          <div tw="px-0 mb-10 md:(px-10 mb-20)">
             <Typography.H1 containerCss={[tw`max-w-104 mb-8 text-primary`]}>
               {t("searchEvents")}
             </Typography.H1>
@@ -57,7 +57,7 @@ export const Landing = () => {
           <EventGrid data={data} searchTerm={searchTerm} />
         </div>
 
-        <div tw="flex flex-row justify-center items-start mt-20">
+        <div tw="flex flex-col px-6 md:(flex-row px-0) justify-center items-start mt-20">
           <div tw="flex flex-col">
             <Typography.H1 containerCss={[tw`max-w-100 mt-20`]}>
               {t("landingCopy")}
@@ -66,7 +66,7 @@ export const Landing = () => {
               {t("contactUs")}
             </Button.Contained>
           </div>
-          <SvgIllustration tw="w-[50%] h-[550px]" />
+          <SvgIllustration tw="w-[50%] h-[550px] mt-[-4rem] md:(mt-0)" />
         </div>
       </PageContainer>
     )

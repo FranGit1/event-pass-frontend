@@ -71,30 +71,30 @@ const GenerateCode = (props: IGenerateCodeProps) => {
           {t("back")}
         </Button.Text>
         <Typography.H2 containerCss={[tw`mb-4`]}>
-          Generate organization code{" "}
+          {t("generateOrganizationCode")}
         </Typography.H2>
         <Typography.Body containerCss={[tw`mb-10`]}>
-          Here you can generate organization invitation code
+          {t("generateOrganizationInvitationCode")}
         </Typography.Body>
 
         <Select
           options={OrganizationsSelectOptions}
-          placeholder="Choose organization"
+          placeholder={t("chooseOrganization")}
           value={organizationOption}
           onChange={(value) => {
             if (value) setOrganizationOption(value);
           }}
           containerCss={[tw`max-w-92`]}
-          label="Choose organization"
+          label={t("chooseOrganization")}
         />
 
         <Button.Contained onClick={handleGenerate} containerCss={[tw`mt-4`]}>
-          Generate invitation code
+          {t("generateInvitationCode")}
         </Button.Contained>
 
         {joinCode && (
           <div tw="mt-10">
-            <Typography.Body>Your code:</Typography.Body>
+            <Typography.Body>{t("yourCode")}</Typography.Body>
             <Typography.Body
               containerCss={[
                 tw`mt-4 border-1 border-primary rounded-2xl py-2 px-6 w-fit`,

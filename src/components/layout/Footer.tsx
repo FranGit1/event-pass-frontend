@@ -52,7 +52,7 @@ export const Footer = (props: IFooterProps) => {
               leadCss={[tw`h-6 w-6`]}
               containerCss={[tw`p-0`]}
             >
-              <a href={`tel:+385 91 925 8421`}>+385 91 9258421</a>
+              <a href={`tel:+385 91 925 8421`}>+385 91 544521</a>
             </Button.Text>
 
             <Typography.Body
@@ -62,14 +62,12 @@ export const Footer = (props: IFooterProps) => {
               {" "}
               {t("contact")}
             </Typography.Body>
-            <Typography.FooterText>
-              Scape consulting d.o.o
-            </Typography.FooterText>
+            <Typography.FooterText>Event Pass d.o.o</Typography.FooterText>
           </div>
         )}
       </div>
       {props.authScreenFooter && (
-        <Typography.FooterText>Scape consulting d.o.o</Typography.FooterText>
+        <Typography.FooterText> Event Pass d.o.o</Typography.FooterText>
       )}
     </footer>
   );

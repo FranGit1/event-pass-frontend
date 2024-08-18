@@ -1,4 +1,4 @@
-import { Breakpoint } from '../types';
+import { Breakpoint } from "../types";
 
 export const breakpointWidth = {
   [Breakpoint.XS]: 420,
@@ -6,23 +6,23 @@ export const breakpointWidth = {
   [Breakpoint.MD]: 1200,
   [Breakpoint.LG]: 1024,
   [Breakpoint.XL]: 1280,
-  [Breakpoint.XL_2]: 1536
+  [Breakpoint.XL_2]: 1536,
 };
 
 const breakpointsArray = [
   {
     screen: Breakpoint.XS_2,
-    width: 0
+    width: 0,
   },
   {
     screen: Breakpoint.XS,
-    width: 420
+    width: 420,
   },
   { screen: Breakpoint.SM, width: 640 },
   { screen: Breakpoint.MD, width: 1200 },
   { screen: Breakpoint.LG, width: 1024 },
   { screen: Breakpoint.XL, width: 1280 },
-  { screen: Breakpoint.XL_2, width: 1536 }
+  { screen: Breakpoint.XL_2, width: 1536 },
 ];
 
 export const getBreakpoint = (): Breakpoint => {
@@ -42,36 +42,36 @@ export const responsiveMultiple = {
   large: {
     breakpoint: { max: 3000, min: 2300 },
     items: 2,
-    partialVisibilityGutter: 50
+    partialVisibilityGutter: 50,
   },
   desktop: {
     breakpoint: { max: 2200, min: 1024 },
     items: 2,
-    partialVisibilityGutter: 40
+    partialVisibilityGutter: 40,
   },
   tablet: {
     breakpoint: { max: 1200, min: 464 },
     items: 1,
-    partialVisibilityGutter: 30
+    partialVisibilityGutter: 30,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    partialVisibilityGutter: 30
-  }
+    partialVisibilityGutter: 30,
+  },
 };
 
 export const responsiveSingle = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 1
+    items: 1,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 1
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
+    items: 1,
+  },
 };

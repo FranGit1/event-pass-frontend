@@ -1,50 +1,56 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../ui/buttons/Button";
 import { Typography } from "../../ui/Typography";
 import { PageContainer } from "./PageContainer";
 import tw from "twin.macro";
 
 export const FooterBuyer = () => {
+  const { t } = useTranslation();
   return (
     <PageContainer
       containerCss={[
-        tw`px-48! flex flex-row items-start justify-between mt-40 mb-10`,
+        tw`flex flex-col px-10! gap-y-10  md:( flex-row items-start justify-between px-48! mt-40 mb-10 gap-y-0)  `,
       ]}
     >
       <div tw="flex flex-col gap-y-2">
-        <Typography.H3 containerCss={[tw`mb-4`]}>Proizvod</Typography.H3>
-        <Typography.FooterLinks>Svi događaji</Typography.FooterLinks>
-        <Typography.FooterLinks>Za organizatore</Typography.FooterLinks>
-        <Typography.FooterLinks>Zatraži demo</Typography.FooterLinks>
+        <Typography.H3 containerCss={[tw`mb-4`]}>{t("product")}</Typography.H3>
+        <Typography.FooterLinks>{t("allEvents")}</Typography.FooterLinks>
+        <Typography.FooterLinks>{t("forOrganizers")}</Typography.FooterLinks>
+        <Typography.FooterLinks>{t("requestDemo")}</Typography.FooterLinks>
       </div>
 
       <div tw="flex flex-col gap-y-2">
-        <Typography.H3 containerCss={[tw`mb-4`]}>Tvrtka</Typography.H3>
+        <Typography.H3 containerCss={[tw`mb-4`]}>{t("company")}</Typography.H3>
         <Typography.H3 containerCss={[tw`mb-4`]}>
-          Event Pass d.o.o.
+          {t("eventPass")}
         </Typography.H3>
-        <Typography.FooterText>Maksimirksa 24,</Typography.FooterText>
-        <Typography.FooterText>10000 Zagreb,</Typography.FooterText>
-        <Typography.FooterText>Hrvatska,</Typography.FooterText>
+        <Typography.FooterText>{t("addressLine1")}</Typography.FooterText>
+        <Typography.FooterText>{t("addressLine2")}</Typography.FooterText>
+        <Typography.FooterText>{t("addressLine3")}</Typography.FooterText>
         <Typography.FooterText containerCss={[tw`mb-4`]}>
-          OIB: 515434335
+          {t("oib")}
         </Typography.FooterText>
-        <Button.Outlined>KONTAKT</Button.Outlined>
+        <Button.Outlined containerCss={[tw`w-fit`]}>
+          {t("contact")}
+        </Button.Outlined>
       </div>
 
       <div tw="flex flex-col gap-y-2">
-        <Typography.H3 containerCss={[tw`mb-4`]}>Resursi</Typography.H3>
-        <Typography.FooterLinks>Centar za pomoć</Typography.FooterLinks>
-        <Typography.FooterLinks>Iskustva klijenata</Typography.FooterLinks>
-        <Typography.FooterLinks>Organizatori</Typography.FooterLinks>
-        <Typography.FooterLinks>Blog</Typography.FooterLinks>
-      </div>
-      <div tw="flex flex-col gap-y-2">
         <Typography.H3 containerCss={[tw`mb-4`]}>
-          Prati nas i prvi saznaj!
+          {t("resources")}
         </Typography.H3>
-        <Typography.FooterLinks>Facebook</Typography.FooterLinks>
-        <Typography.FooterLinks>Instagram</Typography.FooterLinks>
-        <Typography.FooterLinks>LinkedIn</Typography.FooterLinks>
+        <Typography.FooterLinks>{t("helpCenter")}</Typography.FooterLinks>
+        <Typography.FooterLinks>
+          {t("clientExperiences")}
+        </Typography.FooterLinks>
+        <Typography.FooterLinks>{t("organizers")}</Typography.FooterLinks>
+        <Typography.FooterLinks>{t("blog")}</Typography.FooterLinks>
+      </div>
+      <div tw="flex flex-col gap-y-2 mb-10 md:(mb-0)">
+        <Typography.H3 containerCss={[tw`mb-4`]}>{t("followUs")}</Typography.H3>
+        <Typography.FooterLinks>{t("facebook")}</Typography.FooterLinks>
+        <Typography.FooterLinks>{t("instagram")}</Typography.FooterLinks>
+        <Typography.FooterLinks>{t("linkedin")}</Typography.FooterLinks>
       </div>
     </PageContainer>
   );
